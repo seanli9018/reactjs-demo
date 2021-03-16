@@ -1,29 +1,30 @@
-// 导入actionTypes
+// 1. import actionTypes
 import {
   ADD_ALL_TASKS,
   ADD_ONE_TASK,
   DEL_ONE_TASK,
   CHANGE_ONE_FINISHED,
   IS_ALL_FINISHED,
-  DEL_FINISHED_TASKS
+  DEL_FINISHED_TASKS,
+  MOVE_TASK
 } from "./actionTypes";
 
-// reducer 建立默认状态 state
+// 2. reducer: create default state
 const defaultState = {
   tasks: []
 }
 
-// reducer 方法实现
+// 3. reducer: core methods based on action type
 export default function taskReducer(state=defaultState, action){
-  //1.添加所有的已经存在的任务
+  // 1.0 get all existing tasks from database
   if(action.type === ADD_ALL_TASKS) {
-    // clone current state
+    // 1.1 clone current state
     const newState = JSON.parse(JSON.stringify(state));
-    // passing actions data to the newState
+    // 1.2 passing actions data to the newState
     newState.tasks = action.tasks;
     return newState;
   }
-  //2.添加一条任务
+  //2.add a new task
   if(action.type === ADD_ONE_TASK) {
     //2.0 clone current state
     const newState = JSON.parse(JSON.stringify(state));
@@ -34,7 +35,7 @@ export default function taskReducer(state=defaultState, action){
     //2.2 set new state
     return newState;
   }
-  //3.删除一条任务
+  //3.delete one task
   if(action.type === DEL_ONE_TASK) {
     //3.0. clone current state
     const newState = JSON.parse(JSON.stringify(state));
@@ -50,7 +51,7 @@ export default function taskReducer(state=defaultState, action){
     newState.tasks = tasks;
     return newState;
   }
-  //4.修改一条任务的完成状态
+  //4.change one task's finished status
   if(action.type === CHANGE_ONE_FINISHED) {
     //4.0 clone current state
     const newState = JSON.parse(JSON.stringify(state));
@@ -69,7 +70,7 @@ export default function taskReducer(state=defaultState, action){
     newState.tasks = tasks;
     return newState;
   }
-  //5.修改所有任务的完成状态（全选或全部选）
+  //5.change all tasks finished status (select all and de-select all)
   if(action.type === IS_ALL_FINISHED) {
     //5.0 clone current state
     const newState = JSON.parse(JSON.stringify(state));
@@ -89,7 +90,7 @@ export default function taskReducer(state=defaultState, action){
     newState.tasks = tasks;
     return newState;
   }
-  //6.清除所有已完成的任务
+  //6.clean all finished tasks
   if(action.type === DEL_FINISHED_TASKS) {
     //6.0 clone current state
     const newState = JSON.parse(JSON.stringify(state));
@@ -103,8 +104,26 @@ export default function taskReducer(state=defaultState, action){
       }
     })
 
-    // set State and re-rendering
+    //6.2 set State and re-rendering
     newState.tasks = tempTasks;
+    return newState;
+  }
+
+  //7. move task item up and down
+  if(action.type === MOVE_TASK) {
+    //7.0 clone current state
+    const newState = JSON.parse(JSON.stringify(state));
+    const tasks = newState.tasks;
+    const index = action.index;
+    const diff = action.diff;
+
+    //7.1 handle item sorting
+    const item = tasks[index];
+    tasks.splice(index, 1);
+    tasks.splice(index + diff, 0, item);
+
+    //7.2 set state
+    newState.tasks = tasks;
     return newState;
   }
   return state;

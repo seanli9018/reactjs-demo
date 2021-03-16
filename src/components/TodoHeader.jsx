@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { addOneTask } from '../store/actionCreators';
 
-class Header extends Component {
+class TodoHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,10 +49,10 @@ class Header extends Component {
     const {taskInput} = this.state;
 
     return (
-      <div className="app-header">
+      <div className="tasks-header">
         <input className="task-input"
                type="text"
-               placeholder="Please input the task you need to accomplish today, and press enter key!"
+               placeholder="Input the task you need to accomplish, then press enter key!"
                value={taskInput}
                onChange={(e) => this.handleInputChange(e)}
                onKeyDown={(e) => this.handleKeyEvent(e)}
@@ -81,4 +81,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoHeader)

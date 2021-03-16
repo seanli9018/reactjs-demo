@@ -10,3 +10,5 @@ export const CHANGE_ONE_FINISHED = 'change_one_finished';
 export const IS_ALL_FINISHED = 'is_all_finished';
 //6.清除所有已完成的任务
 export const DEL_FINISHED_TASKS = 'del_finished_tasks';
+//7.move task item up and down
+export const MOVE_TASK = 'move_task';

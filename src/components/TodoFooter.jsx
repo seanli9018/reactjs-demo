@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {isAllFinished, delFinishedTasks} from "../store/actionCreators";
 
-class Footer extends Component {
+class TodoFooter extends Component {
   // calculate the count of finished tasks
   _calculateFinishedTasks(tasks) {
     let finishedTaskCount = 0;
@@ -22,7 +22,7 @@ class Footer extends Component {
     const finishedItems = this._calculateFinishedTasks(items);
     const totalItems = items.length;
     return (
-      <div className="app-footer">
+      <div className="tasks-footer">
         <label htmlFor="footer-checkbox">
           <input
             type="checkbox"
@@ -30,9 +30,9 @@ class Footer extends Component {
             checked={finishedItems === totalItems && totalItems > 0}
             onChange={() => dispatchIsAllFinished(finishedItems !== totalItems)} // if it is not all-selected, then flag === true
           />
-          <span className="task-info">已完成{finishedItems}件 / 总计{totalItems}件</span>
+          <span className="task-info">Completed {finishedItems} {finishedItems===1?"task":"tasks"} / Total {totalItems===1?"task":"tasks"}: {totalItems}</span>
         </label>
-        <input type="button" className="task-btn" value="清除已完成任务" onClick={() => dispatchDelFinishedTasks()}/>
+        <input type="button" className="btn" value="Delete Completed Tasks" onClick={() => dispatchDelFinishedTasks()}/>
       </div>
     )
   }
@@ -60,4 +60,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // export Item component
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoFooter);

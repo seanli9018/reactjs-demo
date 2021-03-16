@@ -11,31 +11,69 @@ import Button from './Button';
 
 class Item extends Component {
   static propTypes = {
-    item: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired,
+    handleMoveEvent: PropTypes.func.isRequired,
+    itemIndex: PropTypes.number.isRequired
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      showBtns: false
+      showBtns: false,
+      showUpBtns: false,
+      showDownBtns: false
     }
   }
 
   //flag is a boolean, flag = onMouseOver ? true : false
-  handleShowBtn(flag) {
+  handleShowDelBtn(flag) {
     this.setState({
       showBtns: flag
     })
   }
 
+  //if index !== 0, then show up btn
+  handleUpBtns(index) {
+    if(index !== 0 ){
+      this.setState({
+        showUpBtns: true
+      })
+    }else{
+      this.setState({
+        showUpBtns: false
+      })
+    }
+  }
+
+  //if index !== last index, then show down btn
+  handleDownBtns(index) {
+    if(index !== this.props.tasks.length-1){
+      this.setState({
+        showDownBtns: true
+      })
+    }else{
+      this.setState({
+        showDownBtns: false
+      })
+    }
+  }
+
+  handleShowBtn(flag, index){
+    this.handleShowDelBtn(flag);
+    if(index !== undefined){
+      this.handleUpBtns(index);
+      this.handleDownBtns(index);
+    }
+  }
+
   render() {
-    const {item, dispatchChangeTaskFinished, dispatchDelOneTask} = this.props;
-    const {showBtns} = this.state;
+    const {item, itemIndex, dispatchChangeTaskFinished, dispatchDelOneTask, handleMoveEvent} = this.props;
+    const {showBtns, showUpBtns, showDownBtns} = this.state;
     return (
       <li className="task-item"
           // onFocus={() => this.handleShowBtn(true)}
           // onBlur={() => this.handleShowBtn(false)}
-          onMouseOver={() => this.handleShowBtn(true)}
+          onMouseOver={() => this.handleShowBtn(true, itemIndex)}
           onMouseOut={() => this.handleShowBtn(false)}
       >
         <label htmlFor={"item-check-box"+item.id}>
@@ -51,13 +89,13 @@ class Item extends Component {
         <div className="button-group">
           <Button
             value="Up"
-            showBtn={showBtns}
-            onClickFunction={() => alert("Clicked")}
+            showBtn={showBtns && showUpBtns}
+            onClickFunction={() => handleMoveEvent(itemIndex, -1)}
           />
           <Button
             value="Down"
-            showBtn={showBtns}
-            onClickFunction={() => alert("Clicked")}
+            showBtn={showBtns && showDownBtns}
+            onClickFunction={() => handleMoveEvent(itemIndex, 1)}
           />
           <Button
             value="Delete"

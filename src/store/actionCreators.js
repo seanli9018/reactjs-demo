@@ -5,7 +5,8 @@ import {
   DEL_ONE_TASK,
   CHANGE_ONE_FINISHED,
   IS_ALL_FINISHED,
-  DEL_FINISHED_TASKS
+  DEL_FINISHED_TASKS,
+  MOVE_TASK
 } from "./actionTypes";
 
 //1.添加所有的已经存在的任务
@@ -48,5 +49,14 @@ export const isAllFinished = (flag)=>{
 export const delFinishedTasks = ()=>{
   return {
     type: DEL_FINISHED_TASKS,
+  }
+}
+
+//7. move task item up and down
+export const moveTask = (index, diff) => {
+  return{
+    type: MOVE_TASK,
+    index,
+    diff
   }
 }

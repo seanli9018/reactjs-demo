@@ -2,9 +2,9 @@ import React from 'react';
 
 // Import components
 import List from '../components/List';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import '../index.css';
+import Header from '../components/TodoHeader';
+import Footer from '../components/TodoFooter';
+import '../index.scss';
 
 // Import redux and react-redux
 import { connect } from 'react-redux';
@@ -28,10 +28,9 @@ class Todos extends React.Component {
   }
 
   render() {
-    const {tasks} = this.props;
     return (
-      <div className='app-wrapper'>
-        <div className='app-container'>
+      <div className='tasks-wrapper'>
+        <div className='tasks-container'>
           {/*Header Part - Task Input Box*/}
           <Header />
 
