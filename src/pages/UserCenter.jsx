@@ -10,7 +10,7 @@ class UserCenter extends React.Component {
 
     return (
       <div>
-        This is User Center (a sub - page of User page)
+        This is User Center page
       </div>
     );
   }
