@@ -8,6 +8,18 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from '../src/store/index';
 
+import notice from '../src/utils/notification';
+import modal from '../src/utils/modal'
+
+// React.$notification = (message) => {
+//   console.log(message);
+//   notification.success({message: message});
+// }
+
+// bind notice class instance to React globally
+React.$notice = notice;
+//bind modal class instance to React globally
+React.$modal = modal;
 
 ReactDOM.render(
   <React.StrictMode>
