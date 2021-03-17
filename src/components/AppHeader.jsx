@@ -20,7 +20,7 @@ function AppHeader() {
   return (
     <>
       <Header className="app-header">
-        <Menu onClick={handleClick} selectedKeys="selected" mode="horizontal">
+        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
           {/*Route Navi*/}
           <Menu.Item key="home" icon={<HomeOutlined />}>
             <NavLink exact activeClassName="selected" to="/">Home</NavLink>
