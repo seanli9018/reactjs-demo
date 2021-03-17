@@ -20,6 +20,7 @@ import AppContent from "./components/AppContent";
 
 moment.locale('cn');
 
+// app file
 function App(props) {
   const { locale } = props;
   return (
