@@ -6,7 +6,8 @@ import {
   CHANGE_ONE_FINISHED,
   IS_ALL_FINISHED,
   DEL_FINISHED_TASKS,
-  MOVE_TASK
+  MOVE_TASK,
+  CHANGE_LOCALE
 } from "./actionTypes";
 
 //1.添加所有的已经存在的任务
@@ -58,5 +59,13 @@ export const moveTask = (index, diff) => {
     type: MOVE_TASK,
     index,
     diff
+  }
+}
+
+//8. handle locale
+export const changeLocale = (localeValue) => {
+  return {
+    type: CHANGE_LOCALE,
+    localeValue
   }
 }

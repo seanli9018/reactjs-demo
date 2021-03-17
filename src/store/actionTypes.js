@@ -12,3 +12,5 @@ export const IS_ALL_FINISHED = 'is_all_finished';
 export const DEL_FINISHED_TASKS = 'del_finished_tasks';
 //7.move task item up and down
 export const MOVE_TASK = 'move_task';
+//8. Change locale
+export const CHANGE_LOCALE = 'change_locale';

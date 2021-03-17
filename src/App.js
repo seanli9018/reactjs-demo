@@ -1,51 +1,45 @@
 //import react
 import React from 'react';
-//import antd
-
-
-//import page components
-import Todos from "./pages/Todos";
-import Home from "./pages/Home";
-import UserCenter from "./pages/UserCenter";
-import Dashboard from "./pages/Dashboard";
 
 //import react-router-dom
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  NavLink
-} from "react-router-dom"
-class App extends React.Component {
-  render() {
-    return (
-    <div>
+import { HashRouter as Router } from "react-router-dom"
+
+// import from react redux
+import {connect} from "react-redux";
+
+//import antd
+import { Layout } from 'antd';
+import { ConfigProvider } from "antd";
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+
+//import page components
+import AppFooter from './components/AppFooter';
+import AppHeader from './components/AppHeader';
+import AppContent from "./components/AppContent";
+
+moment.locale('cn');
+
+function App(props) {
+  const { locale } = props;
+  return (
+    <ConfigProvider locale={locale}>
       <Router>
-        {/*Route Navi*/}
-        <ul>
-          <li><NavLink exact activeClassName="selected" to="/">Home</NavLink></li>
-          <li><NavLink exact activeClassName="selected" to="/dashboard">Dashboard</NavLink></li>
-          <li><NavLink exact activeClassName="selected" to={{
-                                                              pathname: "/usercenter",
-                                                              search: "?name=sean&age=18",
-                                                              hash: "#hashtag",
-                                                              state: {fromDashboard: true, link: 'google.com', userId: 'xxjsdf834'}
-                                                            }}>
-            User Center
-          </NavLink></li>
-          <li><NavLink exact activeClassName="selected" to="/tasks">Tasks</NavLink></li>
-        </ul>
-        {/*Route View/output */}
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/usercenter" component={UserCenter} />
-          <Route exact path="/tasks" component={Todos} />
-        </Switch>
+        <Layout>
+          <AppHeader />
+          <AppContent />
+          <AppFooter />
+        </Layout>
       </Router>
-    </div>
-    );
+    </ConfigProvider>
+  )
+}
+
+const mapStateToProps = (state)=>{
+  return {
+    locale: state.locale
   }
 }
 
-export default App;
+// export List component
+export default connect(mapStateToProps, null)(App);

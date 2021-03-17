@@ -1,13 +1,25 @@
 import React from 'react';
 
-class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        This is Home Page
-      </div>
-    );
-  }
+//import from antd
+import { DatePicker } from "antd";
+// import { ConfigProvider } from "antd";
+// import moment from 'moment';
+// import 'moment/locale/zh-cn';
+import {connect} from "react-redux";
+// moment.locale('cn');
+
+ function Home() {
+  return (
+    <div>
+      <DatePicker />
+    </div>
+  );
+}
+const mapStateToProps = (state)=>{
+   return {
+     locale: state.locale
+   }
 }
 
-export default Home;
+// export List component
+export default connect(mapStateToProps, null)(Home);

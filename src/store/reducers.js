@@ -6,12 +6,14 @@ import {
   CHANGE_ONE_FINISHED,
   IS_ALL_FINISHED,
   DEL_FINISHED_TASKS,
-  MOVE_TASK
+  MOVE_TASK,
+  CHANGE_LOCALE
 } from "./actionTypes";
 
 // 2. reducer: create default state
 const defaultState = {
-  tasks: []
+  tasks: [],
+  locale: null
 }
 
 // 3. reducer: core methods based on action type
@@ -108,7 +110,6 @@ export default function taskReducer(state=defaultState, action){
     newState.tasks = tempTasks;
     return newState;
   }
-
   //7. move task item up and down
   if(action.type === MOVE_TASK) {
     //7.0 clone current state
@@ -125,6 +126,18 @@ export default function taskReducer(state=defaultState, action){
     //7.2 set state
     newState.tasks = tasks;
     return newState;
+  }
+  //8. Change locale
+  if(action.type === CHANGE_LOCALE) {
+    // 8.0 clone current state
+    const newState = JSON.parse(JSON.stringify(state));
+    const localeValue = action.localeValue;
+
+    // 8.1 handle change locale
+    newState.locale = localeValue;
+
+    // 8.2 set state
+    return newState
   }
   return state;
 }
