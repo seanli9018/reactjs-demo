@@ -57,17 +57,36 @@ class Item extends Component {
       })
     }
   }
+ 
 
   handleShowBtn(flag, index){
+    // Mouse hover ? show : hide
     this.handleShowDelBtn(flag);
+    
+    // control Up btn and down btn show/hide
     if(index !== undefined){
       this.handleUpBtns(index);
       this.handleDownBtns(index);
     }
   }
 
+  // finished ? dispatch delete task : prompt confirm modal
+  handleItemDelete(itemId, finshedStatus){
+    const { dispatchDelOneTask } = this.props;
+    if(finshedStatus){
+      dispatchDelOneTask(itemId);
+    }else{
+      // prompt Confirm modal
+      React.$modal.confirm(()=>{ // Ok clicked
+        dispatchDelOneTask(itemId);
+      }, ()=>{ // Cancel clicked
+        console.log("Clicked Cancel");
+      }, "Do you really want to delete unfinished task?")
+    }
+  }
+
   render() {
-    const {item, itemIndex, dispatchChangeTaskFinished, dispatchDelOneTask, handleMoveEvent} = this.props;
+    const {item, itemIndex, dispatchChangeTaskFinished, handleMoveEvent} = this.props;
     const {showBtns, showUpBtns, showDownBtns} = this.state;
     return (
       <li className="task-item"
@@ -101,13 +120,14 @@ class Item extends Component {
             value="Delete"
             showBtn={showBtns}
             btnClass="delete-btn"
-            onClickFunction={() => dispatchDelOneTask(item.id)}
+            onClickFunction={() => this.handleItemDelete(item.id, item.finished)}
           />
         </div>
       </li>
     )
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks
