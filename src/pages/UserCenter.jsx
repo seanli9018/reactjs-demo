@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 
-// import language JSON
-//import lang from '../languages/lang';
+// import custimazied hook, get language data.
+import useLanguagePageText from '../custimizedHook/LanguageHook';
+
 function UserCenter(props) {
   const query = new URLSearchParams(props.location.search);
-  const [pageText, setPageText] = useState({})
   const { locale } = props
 
+  //get lang data, passing locale to dynamically load lang data based on Redux locale state.
+  const pageText = useLanguagePageText(locale);
 
-  useEffect(()=>{
-    // after componentDidMount and componentDidUpdate, we need to get langData file and set page text
-    React.$lang.languageLoader().then((langData)=>{
-      setPageText(langData.default);
-    })
-  }, [locale])
-
-  // console.log(pageText)
   console.log(query.get("name"));
   console.log(query.get("age"));
   return (
     <div>
-      {pageText.usercenterTitle}
+      {!!pageText && pageText.usercenterTitle}
     </div>
   )
 }

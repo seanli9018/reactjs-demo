@@ -1,5 +1,5 @@
 // React imports
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 
 // react-redux imports
@@ -9,70 +9,55 @@ import {changeOneFinished, delOneTask} from "../store/actionCreators";
 // components imports
 import Button from './Button';
 
-class Item extends Component {
-  static propTypes = {
-    item: PropTypes.object.isRequired,
-    handleMoveEvent: PropTypes.func.isRequired,
-    itemIndex: PropTypes.number.isRequired
-  }
+// import custimazied hook, get language data.
+import useLanguagePageText from '../custimizedHook/LanguageHook';
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showBtns: false,
-      showUpBtns: false,
-      showDownBtns: false
-    }
-  }
+function Item(props) {
+  const [showBtns, setShowBtns] = useState(false);
+  const [showUpBtns, setShowUpBtns] = useState(false);
+  const [showDownBtns, setShowDownBtns] = useState(false);
+  const { locale } = props;
+  //get lang data, passing locale to dynamically load lang data based on Redux locale state.
+  const pageText = useLanguagePageText(locale);
 
   //flag is a boolean, flag = onMouseOver ? true : false
-  handleShowDelBtn(flag) {
-    this.setState({
-      showBtns: flag
-    })
+  function handleShowDelBtn(flag) {
+    setShowBtns(flag);
   }
 
   //if index !== 0, then show up btn
-  handleUpBtns(index) {
+  function handleUpBtns(index) {
     if(index !== 0 ){
-      this.setState({
-        showUpBtns: true
-      })
+      setShowUpBtns(true);
     }else{
-      this.setState({
-        showUpBtns: false
-      })
+      setShowUpBtns(false);
     }
   }
 
   //if index !== last index, then show down btn
-  handleDownBtns(index) {
-    if(index !== this.props.tasks.length-1){
-      this.setState({
-        showDownBtns: true
-      })
+  function handleDownBtns(index) {
+    if(index !== tasks.length-1){
+      setShowDownBtns(true);
     }else{
-      this.setState({
-        showDownBtns: false
-      })
+      setShowDownBtns(false);
     }
   }
  
 
-  handleShowBtn(flag, index){
+  function handleShowBtn(flag, index){
     // Mouse hover ? show : hide
-    this.handleShowDelBtn(flag);
+    handleShowDelBtn(flag);
     
     // control Up btn and down btn show/hide
     if(index !== undefined){
-      this.handleUpBtns(index);
-      this.handleDownBtns(index);
+      handleUpBtns(index);
+      handleDownBtns(index);
     }
   }
 
   // finished ? dispatch delete task : prompt confirm modal
-  handleItemDelete(itemId, finshedStatus){
-    const { dispatchDelOneTask } = this.props;
+  function handleItemDelete(itemId, finshedStatus){
+    const { dispatchDelOneTask } = props;
     if(finshedStatus){
       dispatchDelOneTask(itemId);
     }else{
@@ -85,52 +70,54 @@ class Item extends Component {
     }
   }
 
-  render() {
-    const {item, itemIndex, dispatchChangeTaskFinished, handleMoveEvent} = this.props;
-    const {showBtns, showUpBtns, showDownBtns} = this.state;
-    return (
-      <li className="task-item"
-          // onFocus={() => this.handleShowBtn(true)}
-          // onBlur={() => this.handleShowBtn(false)}
-          onMouseOver={() => this.handleShowBtn(true, itemIndex)}
-          onMouseOut={() => this.handleShowBtn(false)}
-      >
-        <label htmlFor={"item-check-box"+item.id}>
-          <input
-            className="item-check-box"
-            type="checkbox"
-            name="item-check-box"
-            id={"item-check-box"+item.id}
-            checked={item.finished}
-            onChange={() => dispatchChangeTaskFinished(item.id, !item.finished)}/>
-          <span>{item.title}</span>
-        </label>
-        <div className="button-group">
-          <Button
-            value="Up"
-            showBtn={showBtns && showUpBtns}
-            onClickFunction={() => handleMoveEvent(itemIndex, -1)}
-          />
-          <Button
-            value="Down"
-            showBtn={showBtns && showDownBtns}
-            onClickFunction={() => handleMoveEvent(itemIndex, 1)}
-          />
-          <Button
-            value="Delete"
-            showBtn={showBtns}
-            btnClass="delete-btn"
-            onClickFunction={() => this.handleItemDelete(item.id, item.finished)}
-          />
-        </div>
-      </li>
-    )
-  }
+  const { item, itemIndex, dispatchChangeTaskFinished, handleMoveEvent, tasks } = props;
+
+  return (
+    <li className="task-item"
+        onMouseOver={() => handleShowBtn(true, itemIndex)}
+        onMouseOut={() => handleShowBtn(false)}
+    >
+      <label htmlFor={"item-check-box"+item.id}>
+        <input
+          className="item-check-box"
+          type="checkbox"
+          name="item-check-box"
+          id={"item-check-box"+item.id}
+          checked={item.finished}
+          onChange={() => dispatchChangeTaskFinished(item.id, !item.finished)}/>
+        <span>{item.title}</span>
+      </label>
+      <div className="button-group">
+        <Button
+          value={!!pageText.tasksBtns?pageText.tasksBtns[0]:""}
+          showBtn={showBtns && showUpBtns}
+          onClickFunction={() => handleMoveEvent(itemIndex, -1)}
+        />
+        <Button
+          value={!!pageText.tasksBtns?pageText.tasksBtns[1]:""}
+          showBtn={showBtns && showDownBtns}
+          onClickFunction={() => handleMoveEvent(itemIndex, 1)}
+        />
+        <Button
+          value={!!pageText.tasksBtns?pageText.tasksBtns[2]:""}
+          showBtn={showBtns}
+          btnClass="delete-btn"
+          onClickFunction={() => this.handleItemDelete(item.id, item.finished)}
+        />
+      </div>
+    </li>
+  )
+}
+Item.propTypes = {
+  item: PropTypes.object.isRequired,
+  handleMoveEvent: PropTypes.func.isRequired,
+  itemIndex: PropTypes.number.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks
+    tasks: state.tasks,
+    locale: state.locale
   }
 }
 

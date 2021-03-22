@@ -1,20 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 //import react-redux
 import { connect } from 'react-redux';
 import { addOneTask } from '../store/actionCreators';
 
+// import custimazied hook, get language data.
+import useLanguagePageText from '../custimizedHook/LanguageHook';
+
 function TodoHeader(props) {
   const [taskInput, setTaskInput] = useState('');
-  const [pageText, setPageText] = useState({});
   const { locale } = props;
 
-  useEffect(()=>{
-    // after componentDidMount and componentDidUpdate, we need to get langData file and set page text
-    React.$lang.languageLoader().then((langData)=>{
-      setPageText(langData.default);
-    })
-  }, [locale])
+  //get lang data, passing "locale" to dynamically load lang data based on Redux locale state.
+  const pageText = useLanguagePageText(locale);
 
   function handleInputChange(e) {
     setTaskInput(e.target.value);

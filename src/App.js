@@ -25,7 +25,8 @@ moment.locale('cn');
 function App(props) {
   const { locale } = props;
   return (
-    <ConfigProvider locale={locale==='zh-cn'? zhCN : enUS}>
+    //ConfigProvider is for antdesign UI to pass language objects globally.
+    <ConfigProvider locale={locale==='zh-cn' ? zhCN : enUS}> 
       <Router>
         <Layout>
           <AppHeader />

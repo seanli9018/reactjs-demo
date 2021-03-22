@@ -1,4 +1,5 @@
 {
+  "appHeader": ["Home", "Dashboard", "User Center", "Tasks", "Sign up"],
   "usercenterTitle": "This is user center page.",
   "usercenterContainer": [
     {
@@ -6,5 +7,9 @@
       "description": "This is user description"
     }
   ],
-  "tasksInputPlaceholder": "Input the task you need to accomplish, then press enter key!"
+  "tasksInputPlaceholder": "Input the task you need to accomplish, then press enter key!",
+  "tasksBtns": ["Up", "Down", "Delete"],
+  "tasksFooter": ["Completed", "task", "tasks", "Total task: ", "Total tasks: "],
+  "tasksFooterBtn": "Delete Completed Tasks",
+  "appFooter": ["Email: ", "Phone: "]
 }

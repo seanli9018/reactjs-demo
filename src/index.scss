@@ -26,7 +26,7 @@ code {
   background-color: #1890ff;
   color: white;
   cursor: pointer;
-  padding-bottom: 2px;
+  //padding-bottom: 2px;
 }
 
 .text-input {
@@ -44,6 +44,7 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 999;
   .ant-menu {
     padding: 0;
     .ant-menu-item {
@@ -54,8 +55,9 @@ code {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    span {
+    .header-signup {
       margin-right: 20px;
+      text-decoration: underline;
       a {
         color: black;
       }
@@ -79,6 +81,9 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  //background-color: red;
+  height: 100%;
+  align-items: flex-start;
 }
 
 .tasks-container {
@@ -142,13 +147,15 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 30px;
+  flex-wrap: wrap;
+  margin: 20px 0;
   height: 35px;
   line-height: 35px;
-
-  .task-info {
-    margin: 0 0 0 5px;
-    display: inline-block;
+  .tasks-footer-info{
+    .task-info {
+      margin: 0 0 0 5px;
+      display: inline-block;
+    }
   }
 }
 
@@ -186,6 +193,7 @@ code {
   flex-direction: row;
   justify-content: flex-end;
   padding: 0 20px;
+  z-index: 998;
   .footer-info {
     display: flex;
     flex-direction: column;

@@ -15,13 +15,6 @@ function LangRadio(props) {
     let localeValue = {};
     let selectedLocaleValue = e.target.value;
 
-    // get radio user selected value
-    // if(selectedLocaleValue === 'zh-cn') {
-    //   localeValue = zhCN;
-    // }else{
-    //   localeValue = enUS;
-    // }
-
     // set store locale state
     dispatchChangeLocale(selectedLocaleValue);
 
