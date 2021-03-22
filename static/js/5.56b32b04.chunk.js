@@ -1,2 +1,0 @@
-(this["webpackJsonptodo-list"]=this["webpackJsonptodo-list"]||[]).push([[5],{273:function(t){t.exports=JSON.parse('{"usercenterTitle":"\u8fd9\u662f\u7528\u6237\u4e2d\u5fc3","usercenterContainer":[{"title":"\u7528\u6237\u7ba1\u7406","description":"\u8fd9\u662f\u7528\u6237\u8be6\u60c5"}],"tasksInputPlaceholder":"\u8bf7\u8f93\u5165\u60a8\u9700\u8981\u5b8c\u6210\u7684\u4efb\u52a1\uff0c\u6309\u56de\u8f66\u952e\u786e\u8ba4\uff01"}')}}]);
-//# sourceMappingURL=5.56b32b04.chunk.js.map
