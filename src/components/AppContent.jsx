@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import UserCenter from "../pages/UserCenter";
 import Todos from "../pages/Todos";
+import Register from "../pages/Register";
 
 function AppContent() {
   const { Content } = Layout;
@@ -19,6 +20,7 @@ function AppContent() {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/usercenter" component={UserCenter} />
           <Route exact path="/tasks" component={Todos} />
+          <Route exact path="/register" component={Register} />
         </Switch>
       </Content>
     </>

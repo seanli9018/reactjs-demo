@@ -42,7 +42,10 @@ function AppHeader() {
             <NavLink exact activeClassName="selected" to="/tasks">Tasks</NavLink>
           </Menu.Item>
         </Menu>
-        <LangRadio />
+        <div className="header-info">
+          <span><NavLink exact activeClassName="link-text-active" to="/register">Sign Up</NavLink></span>
+          <LangRadio />
+        </div>
       </Header>
     </>
   )

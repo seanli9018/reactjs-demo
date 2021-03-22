@@ -1,0 +1,10 @@
+{
+  "usercenterTitle": "这是用户中心",
+  "usercenterContainer": [
+    {
+      "title": "用户管理",
+      "description": "这是用户详情"
+    }
+  ],
+  "tasksInputPlaceholder": "请输入您需要完成的任务，按回车键确认！"
+}

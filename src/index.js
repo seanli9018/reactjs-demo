@@ -9,7 +9,8 @@ import { Provider } from 'react-redux';
 import store from '../src/store/index';
 
 import notice from '../src/utils/notification';
-import modal from '../src/utils/modal'
+import modal from '../src/utils/modal';
+import lang from '../src/languages/lang';
 
 // React.$notification = (message) => {
 //   console.log(message);
@@ -20,6 +21,8 @@ import modal from '../src/utils/modal'
 React.$notice = notice;
 //bind modal class instance to React globally
 React.$modal = modal;
+// bind lang class to React globally
+React.$lang = lang;
 
 ReactDOM.render(
   <React.StrictMode>

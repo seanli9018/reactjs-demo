@@ -12,6 +12,8 @@ import { Layout } from 'antd';
 import { ConfigProvider } from "antd";
 import moment from 'moment';
 import 'moment/locale/zh-cn';
+import enUS from 'antd/lib/locale/en_US';
+import zhCN from 'antd/lib/locale/zh_CN';
 
 //import page components
 import AppFooter from './components/AppFooter';
@@ -23,7 +25,7 @@ moment.locale('cn');
 function App(props) {
   const { locale } = props;
   return (
-    <ConfigProvider locale={locale}>
+    <ConfigProvider locale={locale==='zh-cn'? zhCN : enUS}>
       <Router>
         <Layout>
           <AppHeader />

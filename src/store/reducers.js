@@ -10,10 +10,13 @@ import {
   CHANGE_LOCALE
 } from "./actionTypes";
 
+//1.1 import language instance
+import lang from '../languages/lang';
+
 // 2. reducer: create default state
 const defaultState = {
   tasks: [],
-  locale: null
+  locale: lang.userLanguage
 }
 
 // 3. reducer: core methods based on action type

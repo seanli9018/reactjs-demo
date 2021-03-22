@@ -2,22 +2,31 @@ import React from 'react';
 
 //import from antd
 import {  Radio } from 'antd';
-import enUS from 'antd/lib/locale/en_US';
-import zhCN from 'antd/lib/locale/zh_CN';
+
 import moment from "moment";
 import {connect} from "react-redux";
 import { changeLocale } from "../store/actionCreators";
 
 
 function LangRadio(props) {
-  const { locale, dispatchChangeLocale } = props;
+  const { dispatchChangeLocale } = props;
 
   let handleLocale = e => {
+    let localeValue = {};
+    let selectedLocaleValue = e.target.value;
+
     // get radio user selected value
-    const localeValue = e.target.value;
+    // if(selectedLocaleValue === 'zh-cn') {
+    //   localeValue = zhCN;
+    // }else{
+    //   localeValue = enUS;
+    // }
 
     // set store locale state
-    dispatchChangeLocale(localeValue);
+    dispatchChangeLocale(selectedLocaleValue);
+
+    // set localStorage APP_LANG
+    React.$lang.setLang(selectedLocaleValue);
 
     if (!localeValue) {
       moment.locale('en');
@@ -29,11 +38,11 @@ function LangRadio(props) {
   return (
     <>
       <div className="change-locale">
-        <Radio.Group value={!!locale ? locale : enUS} onChange={handleLocale}>
-          <Radio.Button key="en" value={enUS}>
+        <Radio.Group value={!!React.$lang.userLanguage ? React.$lang.userLanguage : 'en'} onChange={handleLocale}>
+          <Radio.Button key="en" value='en'>
             English
           </Radio.Button>
-          <Radio.Button key="cn" value={zhCN}>
+          <Radio.Button key="cn" value='zh-cn'>
             中文
           </Radio.Button>
         </Radio.Group>

@@ -1,0 +1,10 @@
+{
+  "usercenterTitle": "This is user center page.",
+  "usercenterContainer": [
+    {
+      "title": "User info",
+      "description": "This is user description"
+    }
+  ],
+  "tasksInputPlaceholder": "Input the task you need to accomplish, then press enter key!"
+}
