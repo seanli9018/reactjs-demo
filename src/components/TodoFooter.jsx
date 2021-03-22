@@ -55,6 +55,7 @@ function TodoFooter (props) {
   )
 }
 
+// get redux state and passing it to component props.
 const mapStateToProps = (state) => {
   return {
     items: state.tasks,
@@ -62,6 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+// get dispatch function to set or change the redux state.
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatchDelFinishedTasks() {
