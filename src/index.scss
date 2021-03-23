@@ -31,7 +31,6 @@ code {
 
 .text-input {
   border: 1px solid #ccc;
-  margin-bottom: 15px;
   box-sizing: border-box;
   height: 30px;
 }
@@ -174,9 +173,14 @@ code {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      .input-error {
+        font-size: 12px;
+        color: red;
+      }
       .sign-up-btn{
         display: inline;
         max-width: 100px;
+        margin-top: 30px;
       }
     }
   }

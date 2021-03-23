@@ -7,17 +7,14 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
 
 function TextInput(props) {
   // get props
-  const {inputTitle, inputType, className} = props;
-
-  // init state
-  // store input value
-  const [value, setValue] = useState("")
+  const {inputTitle, inputType, className, value, onChange, onBlur} = props;
 
   // store initial props.inputType, the state input type can be set to "text"
   const [type, setType] = useState(props.inputType)
 
   // icon style object ready to use
-  const iconStyle = { fontSize: "14px",
+  const iconStyle = {
+    fontSize: "14px",
     position: "absolute",
     right: "0",
     height: "30px",
@@ -47,15 +44,16 @@ function TextInput(props) {
   // render
   return (
     <>
-      <label htmlFor={inputTitle}>{inputTitle}</label>
-      <div style={{position: "relative"}}>
+      <div style={{position: "relative", marginTop: "15px"}}>
+        <label htmlFor={inputTitle}>{inputTitle}</label>
         <input
           type={type}
           className={"text-input " + (className ? className: "")}
           id={inputTitle}
           value={value}
           style={{width: "100%"}}
-          onChange={(e) => {setValue(e.target.value)}}
+          onChange={(e) => onChange(e)}
+          onBlur={(e) => onBlur(e)}
         />
         {/*If props.inputType is password, we render this icon, if the type is text, we do not render any icon*/}
         {inputType==="password" ? eyeIconDom : null}
@@ -67,6 +65,9 @@ function TextInput(props) {
 // specify Button component prop types
 TextInput.propTypes = {
   inputTitle: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   inputType: PropTypes.string,
   className: PropTypes.string
 }
