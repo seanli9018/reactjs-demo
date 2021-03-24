@@ -37,5 +37,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-// export List component
+// export component
 export default connect(mapStateToProps, null)(AppFooter);

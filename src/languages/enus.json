@@ -11,5 +11,10 @@
   "tasksBtns": ["Up", "Down", "Delete"],
   "tasksFooter": ["Completed", "task", "tasks", "Total task: ", "Total tasks: "],
   "tasksFooterBtn": "Delete Completed Tasks",
+  "signUpTitle": "Sign Up",
+  "signUpInputTitle": ["Email", "Password", "Confirm Password"],
+  "signUpValidateMsg": ["* Email is required.", "* Please enter a valid email address.", "* password is required.", "* confirm password is required.", "* password and confirm password is not matching."],
+  "signUpNoticeMsg": ["Successfully signed up!", "Thank you!", "Please fix the invalid input first.", "Error details can be found under the input box, starts with a \"*\""],
+  "signUpSubmitBtn": "Sign Up",
   "appFooter": ["Email: ", "Phone: "]
 }

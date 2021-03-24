@@ -1,64 +1,97 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types'
 
 // import component
 import Button from "../components/Button";
 import TextInput from "../components/input/TextInput";
 
+// import custimazied hook, get language data.
+import useLanguagePageText from '../custimizedHook/LanguageHook';
+import {connect} from "react-redux";
+
 function Register(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
+  // for form data
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmedPassword: ""
+  })
+
+  // for form fields validations.
   const [errors, setErrors] = useState({});
+
+  //get lang data, passing locale to dynamically load lang data based on Redux locale state.
+  const { locale } = props;
+  const pageText = useLanguagePageText(locale);
 
   // handle email input change function
   function handleEmailChange(e) {
-    setEmail(e.target.value);
+    // deep copy current state data
+    let formDataObj = JSON.parse(JSON.stringify(formData));
+    // change copied data
+    formDataObj.email = e.target.value;
+    // setState the changed copy data to state
+    setFormData(formDataObj);
   }
 
   // handle password input change function
   function handlePasswordChange(e) {
-    setPassword(e.target.value);
+    // deep copy current state data
+    let formDataObj = JSON.parse(JSON.stringify(formData));
+    // change copied data
+    formDataObj.password = e.target.value;
+    // setState the changed copy data to state
+    setFormData(formDataObj);
   }
 
   // handle email input change function
   function handleConfirmedPasswordChange(e) {
-    setConfirmedPassword(e.target.value);
+    // deep copy current state data
+    let formDataObj = JSON.parse(JSON.stringify(formData));
+    // change copied data
+    formDataObj.confirmedPassword = e.target.value;
+    // setState the changed copy data to state
+    setFormData(formDataObj);
   }
 
   //validate field
   function validateField(...field) {
     // deep copy errors state
     let errorsObj = JSON.parse(JSON.stringify(errors));
+
     // email field validate
-    if(field.indexOf('email') >= 0){
-      if(!email) { // if no email input
-        errorsObj.email = '* Email is required.';
-      }else { //if there is email input
+    if(field.length === 0 || field.indexOf('email') >= 0){
+      let re = /^[-\w]+@[-\w]+(\.[-\w]+)+$/;
+      if(!formData.email) { // if no email input
+        errorsObj.email = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[0] : '';
+      }else if (!re.test(formData.email)){ // if there is email and NOT pass the reg test
+        errorsObj.email = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[1] : '';
+      }else { //if there is email input and pass the reg test
         errorsObj.email = "";
       }
     }
+
     // password field validate
-    if(field.indexOf('password') >= 0){
-      if(!password) { // if no password input
-        errorsObj.password = '* password is required.';
+    if(field.length === 0 || field.indexOf('password') >= 0){
+      if(!formData.password) { // if no password input
+        errorsObj.password = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[2] : '';
       }else { //if there is email input
         errorsObj.password = "";
       }
     }
+
     // confirmed password field validate
-    if(field.indexOf('confirmedPassword') >= 0){
-      if(!confirmedPassword) { // if no confirm password input
-        errorsObj.confirmedPassword = '* confirm password is required.';
+    if(field.length === 0 || field.indexOf('confirmedPassword') >= 0){
+      if(!formData.confirmedPassword) { // if no confirm password input
+        errorsObj.confirmedPassword = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[3] : '';
       } else { //if confirm password looks good
         errorsObj.confirmedPassword = "";
       }
     }
 
     //matching password and confirm password
-    if(field.indexOf('matchPassword') >= 0){
-      if(confirmedPassword !== password) { // if not matching
-        errorsObj.confirmedPassword = '* password and confirm password is not matching.';
+    if(field.length === 0 || field.indexOf('matchPassword') >= 0) {
+      if (formData.confirmedPassword !== formData.password) { // if not matching
+        errorsObj.confirmedPassword = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[4] : '';
       } else { //if confirm password looks good
         errorsObj.confirmedPassword = "";
       }
@@ -66,16 +99,29 @@ function Register(props) {
 
     // set error state
     setErrors(errorsObj);
+
+    // once click submit btn, validate errorsObj.
+    for (let k in errorsObj) {
+      if(!!errorsObj[k]){
+        return false; // if there is item in errorsObj: Not pass
+      }
+    }
+    return true; // if there is NO item in errorObj: Passed;
   }
 
   // handle form submit
-  function onSubmit(e) {
-    e.preventDefault();
-    console.log({
-      email: email,
-      password: password,
-      confirmedPassword: confirmedPassword
-    });
+  function onSubmit() {
+    // run validate func, it validates all fields when no parameters passing in;
+    const validateResult = validateField();
+
+    // do something once passed or NOT passed.
+    if(validateResult){
+      React.$notice.success(pageText.signUpNoticeMsg[0],
+        pageText.signUpNoticeMsg[1], 6)
+    }else{
+      React.$notice.error(pageText.signUpNoticeMsg[2],
+        pageText.signUpNoticeMsg[3], 6)
+    }
   }
 
   // render virtual element
@@ -83,44 +129,45 @@ function Register(props) {
     <div className="register-wrapper">
       <div className="register-container">
         <div>
-          <h3>Sign Up</h3>
+          <h3>{pageText.signUpTitle || ""}</h3>
         </div>
-        <form onSubmit={(e)=>{onSubmit(e)}} className="general-form">
+        <form className="general-form">
           <TextInput
-            inputTitle="Email"
-            value={email}
+            inputTitle={pageText.signUpInputTitle ? pageText.signUpInputTitle[0] : ""}
+            value={formData.email}
             onChange={(e) => handleEmailChange(e)}
-            onBlur={(e) => validateField("email")}
+            onBlur={() => validateField("email")}
           />
           <span className="input-error">{errors.email || ""}</span>
           <TextInput
-            inputTitle="Password"
-            value={password}
+            inputTitle={pageText.signUpInputTitle ? pageText.signUpInputTitle[1] : ""}
+            value={formData.password}
             inputType="password"
             onChange={(e) => handlePasswordChange(e)}
-            onBlur={(e) => validateField("password", "matchPassword")}
+            onBlur={() => validateField("password", "matchPassword")}
           />
           <span className="input-error">{errors.password || ""}</span>
           <TextInput
-            inputTitle="Confirm Password"
-            value={confirmedPassword}
+            inputTitle={pageText.signUpInputTitle ? pageText.signUpInputTitle[2] : ""}
+            value={formData.confirmedPassword}
             inputType="password"
             onChange={(e) => handleConfirmedPasswordChange(e)}
-            onBlur={(e) => validateField("confirmedPassword", "matchPassword")}
+            onBlur={() => validateField("confirmedPassword", "matchPassword")}
           />
           <span className="input-error">{errors.confirmedPassword || ""}</span>
-          <Button showBtn={true} btnClass="sign-up-btn" value="Sign Up" onClickFunction={() => {
-            alert("clicked")
-          }}/>
-          {/*<button type="submit">Submit</button>*/}
+          <Button showBtn={true} btnClass="sign-up-btn" value={pageText.signUpSubmitBtn || ""} onClickFunction={() => onSubmit()}/>
         </form>
       </div>
     </div>
   )
 }
 
-// specify Button component prop types
-Register.propTypes = {
+// get redux state and passing it to component props
+const mapStateToProps = (state) => {
+  return {
+    locale: state.locale
+  }
 }
 
-export default Register;
+// export component
+export default connect(mapStateToProps, null)(Register);
