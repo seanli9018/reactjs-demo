@@ -11,6 +11,7 @@ import store from '../src/store/index';
 import notice from '../src/utils/notification';
 import modal from '../src/utils/modal';
 import lang from '../src/languages/lang';
+import auth from '../src/auth/auth';
 
 // React.$notification = (message) => {
 //   console.log(message);
@@ -23,6 +24,8 @@ React.$notice = notice;
 React.$modal = modal;
 // bind lang class to React globally
 React.$lang = lang;
+// bind frontend auth
+React.$auth = auth;
 
 ReactDOM.render(
   <React.StrictMode>

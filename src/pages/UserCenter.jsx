@@ -5,17 +5,21 @@ import {connect} from "react-redux";
 import useLanguagePageText from '../custimizedHook/LanguageHook';
 
 function UserCenter(props) {
-  const query = new URLSearchParams(props.location.search);
+  //const query = new URLSearchParams(props.location.search);
+  //const userId = props.location.state ? props.location.state.userId : '';
+
   const { locale } = props
 
   //get lang data, passing locale to dynamically load lang data based on Redux locale state.
   const pageText = useLanguagePageText(locale);
 
-  console.log(query.get("name"));
-  console.log(query.get("age"));
   return (
     <div>
-      {!!pageText && pageText.usercenterTitle}
+      <h1>{!!pageText.usercenterTitle && pageText.usercenterTitle[0]}</h1>
+      {
+        !!React.$auth.is_authenticated &&
+        <span>{!!pageText.usercenterTitle && pageText.usercenterTitle[1] + React.$auth.email.replace(/@[\s\S]+/, "")}</span>
+      }
     </div>
   )
 }

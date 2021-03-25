@@ -24,6 +24,16 @@ function AppHeader(props) {
   //get lang data, passing locale to dynamically load lang data based on Redux locale state.
   const pageText = useLanguagePageText(locale);
 
+  // handle log out btn click event
+  function handleLogOut() {
+    // clear user auth
+    React.$auth.clearUserAuth();
+    // redirect to log in page
+    props.history.replace('/');
+    // show logout successfully modal
+    React.$notice.success('Successfully logged out!', '', 6);
+  }
+
   return (
     <>
       <Header 
@@ -42,7 +52,7 @@ function AppHeader(props) {
               pathname: "/usercenter",
               search: "?name=sean&age=18",
               hash: "#hashtag",
-              state: {fromDashboard: true, link: 'google.com', userId: 'xxjsdf834'}
+              state: {fromDashboard: true, link: 'google.com', userId: React.$auth.email ? React.$auth.email.replace(/@[\s\S]+/, "") : ""}
             }}>
               {!!pageText.appHeader ? pageText.appHeader[2] : ""}
             </NavLink>
@@ -52,7 +62,26 @@ function AppHeader(props) {
           </Menu.Item>
         </Menu>
         <div className="header-info">
-          <span className="header-signup"><NavLink exact activeClassName="link-text-active" to="/register">{!!pageText.appHeader ? pageText.appHeader[4] : ""}</NavLink></span>
+          {/*if authenticated, show username, else show signup/login btn*/}
+          { React.$auth.is_authenticated ?
+            <span className="header-signup">
+              <NavLink
+                exact
+                activeClassName="link-text-active"
+                to="/usercenter">
+                {React.$auth.email.replace(/@[\s\S]+/, '')}
+              </NavLink>
+              <span className="header-logout" onClick={() => handleLogOut()}>Log out</span>
+            </span> :
+            <span className="header-signup">
+              <NavLink
+                exact
+                activeClassName="link-text-active"
+                to="/register">
+                {!!pageText.appHeader ? pageText.appHeader[4] : ""}
+              </NavLink>
+            </span>
+          }
           <LangRadio />
         </div>
       </Header>

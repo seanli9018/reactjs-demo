@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 
+// import redux
+import {connect} from 'react-redux';
+
 // import component
-import Button from "../components/Button";
-import TextInput from "../components/input/TextInput";
+import Button from '../components/Button';
+import TextInput from '../components/input/TextInput';
 
 // import custimazied hook, get language data.
 import useLanguagePageText from '../custimizedHook/LanguageHook';
-import {connect} from "react-redux";
+
 
 function Register(props) {
   // for form data
@@ -60,7 +63,7 @@ function Register(props) {
 
     // email field validate
     if(field.length === 0 || field.indexOf('email') >= 0){
-      let re = /^[-\w]+@[-\w]+(\.[-\w]+)+$/;
+      let re = /^\w+[\w-]+@\w+[\w-]+(\.[-\w]+)+$/;
       if(!formData.email) { // if no email input
         errorsObj.email = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[0] : '';
       }else if (!re.test(formData.email)){ // if there is email and NOT pass the reg test
@@ -72,9 +75,15 @@ function Register(props) {
 
     // password field validate
     if(field.length === 0 || field.indexOf('password') >= 0){
+      // password has to be 6-15 in length, no Space
+      // password needs to include at least one letter, capital letter, number, and special character.
+      let regArray = [/^\S{6,15}$/, /[A-Z]/, /[a-z]/, /[0-9]/, /[!@#$%^&*)(_\-=?/<>.,+|~`]/];
+      let testResult = regArray.every(e => e.test(formData.password));
       if(!formData.password) { // if no password input
         errorsObj.password = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[2] : '';
-      }else { //if there is email input
+      }else if(!testResult){ // if the password NOT pass the reg test.
+        errorsObj.password = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[3] : '';
+      }else{ //if there is email input
         errorsObj.password = "";
       }
     }
@@ -82,7 +91,7 @@ function Register(props) {
     // confirmed password field validate
     if(field.length === 0 || field.indexOf('confirmedPassword') >= 0){
       if(!formData.confirmedPassword) { // if no confirm password input
-        errorsObj.confirmedPassword = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[3] : '';
+        errorsObj.confirmedPassword = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[4] : '';
       } else { //if confirm password looks good
         errorsObj.confirmedPassword = "";
       }
@@ -91,7 +100,7 @@ function Register(props) {
     //matching password and confirm password
     if(field.length === 0 || field.indexOf('matchPassword') >= 0) {
       if (formData.confirmedPassword !== formData.password) { // if not matching
-        errorsObj.confirmedPassword = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[4] : '';
+        errorsObj.confirmedPassword = pageText.signUpValidateMsg ? pageText.signUpValidateMsg[5] : '';
       } else { //if confirm password looks good
         errorsObj.confirmedPassword = "";
       }
@@ -116,6 +125,8 @@ function Register(props) {
 
     // do something once passed or NOT passed.
     if(validateResult){
+      React.$auth.setUserAuth(formData.email); // set auth;
+      props.history.push('/') // redirect to home page;
       React.$notice.success(pageText.signUpNoticeMsg[0],
         pageText.signUpNoticeMsg[1], 6)
     }else{
