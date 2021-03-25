@@ -16,5 +16,6 @@
   "signUpValidateMsg": ["* Email is required.", "* Please enter a valid email address.", "* password is required.", "* password has to be 6-15 in length , needs to include at least one letter, capital letter, number, and special character.", "* confirm password is required.", "* password and confirm password is not matching."],
   "signUpNoticeMsg": ["Successfully signed up!", "Thank you!", "Please fix the invalid input first.", "Error details can be found under the input box, starts with a \"*\""],
   "signUpSubmitBtn": "Sign Up",
+  "loginLogoutMsg": ["", "Successfully logged out!"],
   "appFooter": ["Email: ", "Phone: "]
 }

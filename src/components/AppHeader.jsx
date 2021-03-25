@@ -31,7 +31,8 @@ function AppHeader(props) {
     // redirect to log in page
     props.history.replace('/');
     // show logout successfully modal
-    React.$notice.success('Successfully logged out!', '', 6);
+    let logoutMsg = pageText.loginLogoutMsg ? pageText.loginLogoutMsg[1] : "";
+    React.$notice.success(logoutMsg, '', 6);
   }
 
   return (
