@@ -1,5 +1,5 @@
 {
-  "appHeader": ["Home", "Dashboard", "User Center", "Tasks", "Sign up/Log in"],
+  "appHeader": ["Home", "Dashboard", "User Center", "Tasks", "Movies", "Sign up/Log in"],
   "usercenterTitle": ["Welcome to user center!", "Your username is："],
   "usercenterContainer": [
     {

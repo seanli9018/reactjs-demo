@@ -61,6 +61,9 @@ function AppHeader(props) {
           <Menu.Item key="/tasks" icon={<UnorderedListOutlined />}>
             <NavLink exact to="/tasks">{!!pageText.appHeader ? pageText.appHeader[3] : ""}</NavLink>
           </Menu.Item>
+          <Menu.Item key="/movies" icon={<UnorderedListOutlined />}>
+            <NavLink exact to="/movies">{!!pageText.appHeader ? pageText.appHeader[4] : ""}</NavLink>
+          </Menu.Item>
         </Menu>
         <div className="header-info">
           {/*if authenticated, show username, else show signup/login btn*/}
@@ -79,7 +82,7 @@ function AppHeader(props) {
                 exact
                 activeClassName="link-text-active"
                 to="/register">
-                {!!pageText.appHeader ? pageText.appHeader[4] : ""}
+                {!!pageText.appHeader ? pageText.appHeader[5] : ""}
               </NavLink>
             </span>
           }
