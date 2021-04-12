@@ -24,7 +24,7 @@ function hideGlobalLoading() {
   requestCount --; // we decrease 1 request count
 }
 
-const BASE_URL = 'http://makeup-api.herokuapp.com/api/v1/products.json';
+const BASE_URL = ' https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json';
 
 class Http {
   constructor() {
