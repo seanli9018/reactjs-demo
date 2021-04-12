@@ -1,6 +1,8 @@
 @import '~antd/dist/antd.css';
+
 $headerHeight: 65px;
 $footerHeight: 80px;
+$mobileWidth: "(max-width: 600px)";
 
 body {
   margin: 0;
@@ -14,6 +16,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+//mixins
+@mixin border-top-shadow() {
+  -webkit-box-shadow: 0 -6px 5px -3px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0 -6px 5px -3px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0 -6px 5px -3px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
 // common class style
@@ -33,6 +42,10 @@ code {
   border: 1px solid #ccc;
   box-sizing: border-box;
   height: 30px;
+}
+
+// global loading spin circle css
+.global-loading {
 }
 
 // app header
@@ -74,7 +87,6 @@ code {
 // app content
 .app-content {
   background-color: white;
-  height: calc(100vh - #{$headerHeight} - #{$footerHeight});
   padding: 30px 20px 0 20px;
   box-sizing: border-box;
 }
@@ -163,12 +175,12 @@ code {
 }
 
 // register page
-.register-wrapper{
+.register-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
-  .register-container{
+  .register-container {
     padding: 20px;
     margin: 0 auto;
     width: 100%;
@@ -181,7 +193,7 @@ code {
         font-size: 12px;
         color: red;
       }
-      .sign-up-btn{
+      .sign-up-btn {
         display: inline;
         max-width: 100px;
         margin-top: 30px;
@@ -190,11 +202,139 @@ code {
   }
 }
 
+// makeup page
 
+//makeup general
+.makeup-light-text {
+  font-size: 12px;
+  color: #48494B;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
+//makeup grid image gallery
+.image-grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  @media #{$mobileWidth} {
+    grid-template-columns: unset;
+  };
+  max-width: 1200px;
+  margin: 0 auto;
+  .photo {
+    img {
+      width: 100%;
+    }
+  }
+  .photo-lips {
+    grid-area: 1/2/3/2;
+  }
+}
+
+// makeup nav side bar
+.makeup-layout-background {
+  background: #fff;
+  margin: 0 auto;
+  padding: 30px 0;
+  .ant-layout-sider-children {
+    margin-top: 0;
+  }
+  .makeup-nav-icon {
+    width: 20px;
+    height: 25px;
+    margin: 0 10px 0 0;
+  }
+}
+
+// makeup list item
+.makeup-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  i {
+    width: 206px;
+    height: 0;
+  }
+  .makeup-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 206px;
+    height: 361px;
+    position: relative;
+    .makeup-item-cover {
+      background-color: rgba(76, 175, 80, 0);
+      height: 100%;
+      width: 206px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .makeup-image {
+      width: 206px;
+      height: 294px;
+      overflow: hidden;
+    }
+    .makeup-details {
+      width: 206px;
+      height: 165px;
+      background-color: #eee;
+      position: absolute;
+      top: 127px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 6px;
+      box-sizing: border-box;
+      @include border-top-shadow;
+      .makeup-title {
+        font-weight: bold;
+      }
+      .makeup-tags {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .makeup-tag {
+          margin-right: 3px;
+          margin-bottom: 3px;
+          background-color: #ccc;
+          border-radius: 3px;
+          padding: 3px;
+        }
+      }
+    }
+    .makeup-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 6px;
+      .makeup-title {
+        font-weight: bold;
+      }
+      .makeup-colors {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .makeup-color {
+          margin: 3px 3px 3px 0;
+          width: 12px;
+          height: 12px;
+          border-radius: 100%;
+        }
+      }
+    }
+  }
+}
 //App footer
 .app-footer {
-  box-shadow: 0px -4px 10px 0px rgba(0, 0, 0, 0.25);
+  @include border-top-shadow;
   height: $footerHeight;
   padding: 0;
   display: flex;

@@ -3,7 +3,7 @@ import React from 'react';
 
 // import from antd
 import {Layout, Menu} from 'antd'
-import { DashboardOutlined, HomeOutlined, UnorderedListOutlined, UserOutlined } from "@ant-design/icons";
+import { DashboardOutlined, HomeOutlined, UnorderedListOutlined, UserOutlined, HeartOutlined } from "@ant-design/icons";
 
 // import from react-router-dom
 import { NavLink, withRouter } from "react-router-dom";
@@ -61,8 +61,8 @@ function AppHeader(props) {
           <Menu.Item key="/tasks" icon={<UnorderedListOutlined />}>
             <NavLink exact to="/tasks">{!!pageText.appHeader ? pageText.appHeader[3] : ""}</NavLink>
           </Menu.Item>
-          <Menu.Item key="/movies" icon={<UnorderedListOutlined />}>
-            <NavLink exact to="/movies">{!!pageText.appHeader ? pageText.appHeader[4] : ""}</NavLink>
+          <Menu.Item key="/makeups" icon={<HeartOutlined />}>
+            <NavLink to="/makeups">{!!pageText.appHeader ? pageText.appHeader[4] : ""}</NavLink>
           </Menu.Item>
         </Menu>
         <div className="header-info">

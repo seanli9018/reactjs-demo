@@ -14,3 +14,7 @@ export const DEL_FINISHED_TASKS = 'del_finished_tasks';
 export const MOVE_TASK = 'move_task';
 //8. Change locale
 export const CHANGE_LOCALE = 'change_locale';
+//9. Global loading state - open
+export const OPEN_LOADING = 'open_loading';
+//10. Global loading state - close
+export const CLOSE_LOADING = 'close_loading';

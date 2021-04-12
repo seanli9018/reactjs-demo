@@ -7,7 +7,7 @@ import {
   IS_ALL_FINISHED,
   DEL_FINISHED_TASKS,
   MOVE_TASK,
-  CHANGE_LOCALE
+  CHANGE_LOCALE, OPEN_LOADING, CLOSE_LOADING
 } from "./actionTypes";
 
 //1.添加所有的已经存在的任务
@@ -67,5 +67,21 @@ export const changeLocale = (localeValue) => {
   return {
     type: CHANGE_LOCALE,
     localeValue
+  }
+}
+
+//9. global loading open;
+export const openLoading = () => {
+  return {
+    type: OPEN_LOADING,
+    loading: true
+  }
+}
+
+//10. global loading close;
+export const closeLoading = () => {
+  return {
+    type: CLOSE_LOADING,
+    loading: false
   }
 }

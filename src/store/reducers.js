@@ -7,7 +7,9 @@ import {
   IS_ALL_FINISHED,
   DEL_FINISHED_TASKS,
   MOVE_TASK,
-  CHANGE_LOCALE
+  CHANGE_LOCALE,
+  OPEN_LOADING,
+  CLOSE_LOADING
 } from "./actionTypes";
 
 //1.1 import language instance
@@ -16,7 +18,8 @@ import lang from '../languages/lang';
 // 2. reducer: create default state
 const defaultState = {
   tasks: [],
-  locale: lang.userLanguage
+  locale: lang.userLanguage,
+  loading: false
 }
 
 // 3. reducer: core methods based on action type
@@ -138,6 +141,30 @@ export default function taskReducer(state=defaultState, action){
 
     // 8.1 handle change locale
     newState.locale = localeValue;
+
+    // 8.2 set state
+    return newState
+  }
+  //9. global loading open;
+  if(action.type === OPEN_LOADING) {
+    // 9.0 clone current state
+    const newState = JSON.parse(JSON.stringify(state));
+    const loading = action.loading;
+
+    // 9.1 handle change loading status to true
+    newState.loading = loading;
+
+    // 9.2 set state
+    return newState
+  }
+  //10. global loading close;
+  if(action.type === CLOSE_LOADING) {
+    // 10.0 clone current state
+    const newState = JSON.parse(JSON.stringify(state));
+    const loading = action.loading;
+
+    // 8.1 handle change loading status to false
+    newState.loading = loading;
 
     // 8.2 set state
     return newState
