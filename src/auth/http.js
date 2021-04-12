@@ -30,8 +30,7 @@ const BASE_URL = ' https://cors-anywhere.herokuapp.com/http://makeup-api.herokua
 class Http {
   constructor() {
     this.http = axios.create({
-      baseURL: BASE_URL,
-      timeout: 20000
+      baseURL: BASE_URL
     })
 
     // Add a request interceptor
