@@ -1,5 +1,5 @@
 // import react
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 // import antd icon
 import {HeartOutlined} from "@ant-design/icons";
@@ -13,8 +13,9 @@ import MakeupItem from "./MakeupItem";
 function LipsticksList(props) {
   // init lipsticks state
   const [lipsticks, setLipsticks] = useState([]);
+  const [listWidth, setListWidth] = useState(0);
 
-  // calculate sreen height, after component mounted and updated
+  // calculate screen height, after component mounted and updated
   const { height, width } = useWindowDimensions();
 
   // calculate scroll top
@@ -22,7 +23,7 @@ function LipsticksList(props) {
   // console.log(scrollTop)
   // console.log(scrolling)
   
-
+  const listEleRef = useRef(null);
   // fetch lipsticks data, and set state
   useEffect(() => {
     React.$http.getLipSticks().then(res => {
@@ -32,9 +33,16 @@ function LipsticksList(props) {
     })
   }, [])
 
+  // get list element width
+  useEffect(() => {
+    if(listEleRef.current) {
+      setListWidth(listEleRef.current.offsetWidth);
+    }
+  });
+
   const itemHeight = 361;
   const itemWidth = 206;
-  const itemsPerRow = Math.floor((width - 200 - 88) / itemWidth); // the number of item per row
+  const itemsPerRow = Math.floor(listWidth / itemWidth); // the number of item per row
   const listTotalHeight = Math.ceil(lipsticks.length / itemsPerRow) * itemHeight; // the total height of list
   //const visibleItemsCount = Math.ceil(height / itemHeight) * itemsPerRow; // the number of items that falls within the visible screen
   const visibleRowsCount = Math.ceil(height / itemHeight); // visible screen can contain how many rows
@@ -58,7 +66,7 @@ function LipsticksList(props) {
 
   // prepare blank item
   let iElement = [];
-  const iElementLength =  Math.floor(width / itemWidth);
+  const iElementLength =  Math.floor(listWidth / itemWidth);
   for(let i=0; i<iElementLength; i++) {
     iElement.push(<i key={i}></i>)
   }
@@ -72,18 +80,19 @@ function LipsticksList(props) {
   }
 
   return (
-    <div className="makeup-wrapper">
+    <>
       <h3><HeartOutlined /> Lipsticks </h3>
-      <div className="list-total-height" style={{height: listTotalHeight}}></div>
-      <ul className="makeup-list" style={{ transform: getPrevTransform()}}>
-        {preLipsticksElement}
-      </ul>
-      <ul className="makeup-list" style={{ transform: getTransform() }}>
-        {lipsticksElement}
-        {/* for filling the gap of flex */}
-        {iElement}
-      </ul>
-    </div>
+      <div className="makeup-wrapper" style={{height: listTotalHeight}}>
+        <ul className="makeup-list" style={{ transform: getPrevTransform()}}>
+          {preLipsticksElement}
+        </ul>
+        <ul className="makeup-list" ref={listEleRef} style={{ transform: getTransform() }}>
+          {lipsticksElement}
+          {/* for filling the gap of flex */}
+          {iElement}
+        </ul>
+      </div>
+    </>
   )
 }
 

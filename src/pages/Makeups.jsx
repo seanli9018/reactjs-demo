@@ -21,6 +21,12 @@ function Makeup(props) {
   return (
     <div>
       <h1>Makeups</h1>
+      <h5>
+        Data are from MakeupAPI, a free public api source. There is no backend pagination setup <br />
+        Therefore, It takes a while to fetch all data at one time.<br />
+        In order to enhance the performance, dynamic list items LAZY rendering is utilized.<br />
+        (Only the list items within the visible screen are rendered.)
+      </h5>
       <div className="image-grid">
         <div className="photo">
           <LazyImage
