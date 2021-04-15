@@ -42,12 +42,15 @@ function AppHeader(props) {
       >
         <Menu selectedKeys={[props.history.location.pathname]} mode="horizontal">
           {/*Route Navi*/}
-          <Menu.Item key="/" icon={<HomeOutlined />}>
-            <NavLink exact to="/">{!!pageText.appHeader ? pageText.appHeader[0] : ""}</NavLink>
+          <Menu.Item key="/makeups" icon={<HeartOutlined />}>
+            <NavLink to="/makeups">{!!pageText.appHeader ? pageText.appHeader[4] : ""}</NavLink>
           </Menu.Item>
-          <Menu.Item key="/dashboard" icon={<DashboardOutlined />}>
-            <NavLink exact to="/dashboard">{!!pageText.appHeader ? pageText.appHeader[1] : ""}</NavLink>
+          <Menu.Item key="/tasks" icon={<UnorderedListOutlined />}>
+            <NavLink exact to="/tasks">{!!pageText.appHeader ? pageText.appHeader[3] : ""}</NavLink>
           </Menu.Item>
+          {/*<Menu.Item key="/dashboard" icon={<DashboardOutlined />}>*/}
+          {/*  <NavLink exact to="/dashboard">{!!pageText.appHeader ? pageText.appHeader[1] : ""}</NavLink>*/}
+          {/*</Menu.Item>*/}
           <Menu.Item key="/usercenter" icon={<UserOutlined />}>
             <NavLink exact to={{
               pathname: "/usercenter",
@@ -57,12 +60,6 @@ function AppHeader(props) {
             }}>
               {!!pageText.appHeader ? pageText.appHeader[2] : ""}
             </NavLink>
-          </Menu.Item>
-          <Menu.Item key="/tasks" icon={<UnorderedListOutlined />}>
-            <NavLink exact to="/tasks">{!!pageText.appHeader ? pageText.appHeader[3] : ""}</NavLink>
-          </Menu.Item>
-          <Menu.Item key="/makeups" icon={<HeartOutlined />}>
-            <NavLink to="/makeups">{!!pageText.appHeader ? pageText.appHeader[4] : ""}</NavLink>
           </Menu.Item>
         </Menu>
         <div className="header-info">
