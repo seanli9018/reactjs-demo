@@ -5,7 +5,7 @@ export function usePrevious(value) {
 	const ref = useRef();
 	useEffect(() => {
 		ref.current = value;
-	});
+	},[value]);
 	return ref.current;
 }
 
@@ -34,55 +34,60 @@ export function useWindowDimensions() {
   return windowDimensions;
 }
 
-// hook for getting element width and height
+// hook for getting element width (Will work on the element height later)
 export function useEleDimensions(element) {
-  const [elementDimensions, setElementDimensions] = useState({
-    elementWidth: 0,
-    elementHeight: 0
-  });
+  const [ elementWidth, setElementWidth ] = useState(0);
 
   // get list element width
   useEffect(() => {
     // set state after first time mounted
-    if(element.current) {
-      setElementDimensions({
-        elementWidth: element.current.offsetWidth,
-        elementHeight: element.current.offsetHeight
-      });
+    const handleUpdateEleWidth = () => {
+      if(element.current) {
+        setElementWidth(element.current.clientWidth);
+      }
     }
-
+    window.addEventListener('resize', handleUpdateEleWidth);
+    handleUpdateEleWidth()
+    // on Component Will Unmount
+    return () => window.removeEventListener('resize', handleUpdateEleWidth);
   }, [element.current])
 
-  return elementDimensions;
+  return elementWidth;
 }
 
 // hook for getting element position scroll status (scrollTop and scrolling)
-export function useScrollTop(e) {
+export function useScrollTop() {
   const [ scrollStatus, setScrollStatus ] = useState({scrollTop: 0, scrolling: false});
 	const preScrollTop = usePrevious(scrollStatus.scrollTop);
 
   useEffect(() => {
-    const onScroll = () => {
+    const handleOnScroll = () => {
       setScrollStatus({
         scrollTop: window.pageYOffset, // distance between visible screen's top to page top
         scrolling: window.pageYOffset > preScrollTop
       });
     };
-    window.addEventListener('scroll', onScroll);
-		return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', handleOnScroll);
+		return () => window.removeEventListener('scroll', handleOnScroll);
   }, [scrollStatus])
 
 	return scrollStatus;
 }
 
-// hook for getting element to body top distance after first time mounted
+// hook for getting element top to body top distance after first time mounted
 // (not the distance to parent element, no dependencies, which means will not update after component updated)
 export function useEleDistanceToTop (element) {
   const [distanceToTop, setDistanceToTop] = useState(0);
 
   useEffect(() => {
-    let eleDistanceToTop = element ? (window.pageYOffset + element.current.getBoundingClientRect().top) : 0;
-    setDistanceToTop(eleDistanceToTop);
+    const handleUpdateEleDistanceToTop = () => {
+      let eleDistanceToTop = element.current ? (window.pageYOffset + element.current.getBoundingClientRect().top) : 0;
+      setDistanceToTop(eleDistanceToTop);
+    }
+    handleUpdateEleDistanceToTop();
+    window.addEventListener('resize', handleUpdateEleDistanceToTop);
+    // on Component Will Unmount
+    return () => window.removeEventListener('resize', handleUpdateEleDistanceToTop);
   }, []);
 
   return distanceToTop;
