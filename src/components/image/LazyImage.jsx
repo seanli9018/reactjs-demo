@@ -15,6 +15,7 @@ function LazyImage(props) {
   // load image once DOM mounted
   useEffect(() => {
     const image = new Image();
+
     // handle load and error;
     const handleLoad = () => {
       setLoaded(true);
@@ -33,7 +34,7 @@ function LazyImage(props) {
       image.removeEventListener('load', handleLoad);
       image.removeEventListener('error', handleError);
     }
-  }, [props.src])
+  }, [])
 
 
   return (

@@ -14,6 +14,10 @@ const { Sider } = Layout;
 
 function MakeupNav (props) {
   let { path, url } = useRouteMatch();
+  // console.log(path);
+  // console.log("==========")
+  // console.log(url);
+
   return (
     <div className="makeup-nav-wrapper">
       <Sider className="site-layout-background" width={200}>
@@ -64,20 +68,24 @@ function MakeupNav (props) {
             Eyeshadow
           </Menu.Item>
           <Menu.Item key="Foundation">
-            <LazyImage
-              src="http://makeup-api.herokuapp.com/assets/foundation-9985c8a404d4a19cf7a2985ed504958cadd9f71252a73c90b6a7178bf7075143.svg"
-              alt={["Foundation", "product"]}
-              className="makeup-nav-icon"
-            />
-            Foundation
+            <NavLink to={`${url}/foundation`}>
+              <LazyImage
+                src="http://makeup-api.herokuapp.com/assets/foundation-9985c8a404d4a19cf7a2985ed504958cadd9f71252a73c90b6a7178bf7075143.svg"
+                alt={["Foundation", "product"]}
+                className="makeup-nav-icon"
+              />
+              Foundation
+            </NavLink>
           </Menu.Item>
           <Menu.Item key="Lip Liner">
-            <LazyImage
-              src="http://makeup-api.herokuapp.com/assets/lip_liner-3f40bb63957aa7d47e3a2d1356b9380aa093271e5d58f3518181fd427e388d93.svg"
-              alt={["Lip", "Liner", "product"]}
-              className="makeup-nav-icon"
-            />
-            Lip Liner
+            <NavLink to={`${url}/lipliner`}>
+              <LazyImage
+                src="http://makeup-api.herokuapp.com/assets/lip_liner-3f40bb63957aa7d47e3a2d1356b9380aa093271e5d58f3518181fd427e388d93.svg"
+                alt={["Lip", "Liner", "product"]}
+                className="makeup-nav-icon"
+              />
+              Lip Liner
+            </NavLink>
           </Menu.Item>
           <Menu.Item key="Lipstick">
             <NavLink to={`${url}/lipsticks`}>
@@ -90,20 +98,24 @@ function MakeupNav (props) {
             </NavLink>
           </Menu.Item>
           <Menu.Item key="Mascara">
-            <LazyImage
-              src="http://makeup-api.herokuapp.com/assets/mascara-0deeeb81e58f31ddbff07847bfd0820e5ecdba1419f4281da743a05e0d6b3e69.svg"
-              alt={["Mascara", "product"]}
-              className="makeup-nav-icon"
-            />
-            Mascara
+            <NavLink to={`${url}/mascara`}>
+              <LazyImage
+                src="http://makeup-api.herokuapp.com/assets/mascara-0deeeb81e58f31ddbff07847bfd0820e5ecdba1419f4281da743a05e0d6b3e69.svg"
+                alt={["Mascara", "product"]}
+                className="makeup-nav-icon"
+              />
+              Mascara
+            </NavLink>
           </Menu.Item>
           <Menu.Item key="Nail Polish">
-            <LazyImage
-              src="http://makeup-api.herokuapp.com/assets/nail_polish-a7e7204834c0c30e8b57a1ba9896656331e228b0daa09d1705d1ab29bc0b7151.svg"
-              alt={["Nail", "Polish", "product"]}
-              className="makeup-nav-icon"
-            />
-            Nail Polish
+            <NavLink to={`${url}/nailpolish`}>
+              <LazyImage
+                src="http://makeup-api.herokuapp.com/assets/nail_polish-a7e7204834c0c30e8b57a1ba9896656331e228b0daa09d1705d1ab29bc0b7151.svg"
+                alt={["Nail", "Polish", "product"]}
+                className="makeup-nav-icon"
+              />
+              Nail Polish
+            </NavLink>
           </Menu.Item>
         </Menu>
       </Sider>

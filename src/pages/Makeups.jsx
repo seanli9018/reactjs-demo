@@ -4,12 +4,16 @@ import React from 'react';
 import { Layout, Menu } from "antd";
 
 // import react router
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 
 // import components
 import MakeupNav from '../components/makeup/MakeupNav';
 import LazyImage from '../components/image/LazyImage';
 import LipsticksList from '../components/makeup/LipsticksList';
+import NailPolishList from "../components/makeup/NailPolishList";
+import MascaraList from "../components/makeup/MascaraList";
+import LipLinerList from "../components/makeup/LipLinerList";
+import FoundationList from "../components/makeup/FoundationList";
 
 
 const { Content } = Layout;
@@ -67,8 +71,11 @@ function Makeup(props) {
           {/*Route View/output */}
           <Switch>
             <Route exact path={path} component={LipsticksList} />
+            <Route path={`${path}/foundation`} component={FoundationList} />
+            <Route path={`${path}/lipliner`} component={LipLinerList} />
             <Route path={`${path}/lipsticks`} component={LipsticksList} />
-            <Route path="/makeups/lipsticks" component={LipsticksList} />
+            <Route path={`${path}/mascara`} component={MascaraList} />
+            <Route path={`${path}/nailpolish`} component={NailPolishList} />
           </Switch>
         </Content>
       </Layout>

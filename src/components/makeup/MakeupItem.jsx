@@ -41,8 +41,8 @@ function MakeupItem(props) {
   //prepare makeup color circles element
   const makeupColorElement =
     <div className="makeup-colors">
-      {productColors.map(color => {
-        return <div className="makeup-color" key={color.colour_name} style={{backgroundColor: color.hex_value}}></div>
+      {productColors.map((color, index) => {
+        return <div className="makeup-color" key={color.colour_name + index} style={{backgroundColor: color.hex_value}}></div>
       })}
     </div>
 

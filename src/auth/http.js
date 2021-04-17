@@ -64,6 +64,25 @@ class Http {
     return this.http.get(url);
   }
 
+  getNailPolish() {
+    const url = '?product_type=nail_polish';
+    return this.http.get(url);
+  }
+
+  getMascara() {
+    const url = '?product_type=mascara';
+    return this.http.get(url);
+  }
+
+  getLipLiner() {
+    const url = '?product_type=lip_liner';
+    return this.http.get(url);
+  }
+
+  getFoundation() {
+    const url = '?product_type=foundation';
+    return this.http.get(url);
+  }
   // getMovieDetails(movieId) {
   //   const url = '/title/get-details?tconst=' + movieId;
   //   return this.http.get(url);

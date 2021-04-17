@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd'
-import { Route, Switch } from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 
 // import Home from '../pages/Home';
@@ -17,7 +17,9 @@ function AppContent() {
       <Content className="app-content">
         {/*Route View/output */}
         <Switch>
-          <Route exact path="/" component={Makeups} />
+          <Route exact path="/" render={() => {
+            return <Redirect to={"/makeups"} />
+          }} />
           <Route path="/makeups" component={Makeups} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/usercenter" component={UserCenter} />

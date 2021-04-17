@@ -8,14 +8,14 @@ import { HeartOutlined } from "@ant-design/icons";
 import MakeupItem from "./MakeupItem";
 import VerticalScrollVirtualList from '../utils/VerticalScrollVirtualList';
 
-function LipsticksList(props) {
+function FoundationList(props) {
   // init state
-  const [lipsticks, setLipsticks] = useState([]);
+  const [foundation, setFoundation] = useState([]);
 
-  // fetch lipsticks data, and set state
+  // fetch nail polish data, and set state
   useEffect(() => {
-    React.$http.getLipSticks().then(res => {
-      setLipsticks(res.data);
+    React.$http.getFoundation().then(res => {
+      setFoundation(res.data);
     }).catch(err => {
       console.log(err)
     })
@@ -24,7 +24,7 @@ function LipsticksList(props) {
   // prepare func to generate list items. visibleItems are passed in by the parent component VerticalScrollVirtualList
   const renderChildren = (visibleItems) => {
     if (visibleItems) {
-      return visibleItems.map((item, index) => {
+      return visibleItems.map(item => {
         return <MakeupItem key={item.id} makeupItem={item} />
       })
     }
@@ -33,8 +33,8 @@ function LipsticksList(props) {
 
   return (
     <>
-      <h3><HeartOutlined /> Lipsticks </h3>
-      <VerticalScrollVirtualList list={lipsticks} itemDimensions={{width: 206, height: 361}}>
+      <h3><HeartOutlined /> Foundation </h3>
+      <VerticalScrollVirtualList list={foundation} itemDimensions={{width: 206, height: 361}}>
         {/* VerticalScrollVirtualList takes a function as children.
         function should take visibleItems as argument and loop the argument to return a item list*/}
         { renderChildren }
@@ -43,4 +43,4 @@ function LipsticksList(props) {
   )
 }
 
-export default LipsticksList;
+export default FoundationList;
