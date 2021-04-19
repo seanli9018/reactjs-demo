@@ -83,6 +83,11 @@ class Http {
     const url = '?product_type=foundation';
     return this.http.get(url);
   }
+
+  getProductDetail(id) {
+    const url = `/${id}`
+    return this.http.get(url);
+  }
   // getMovieDetails(movieId) {
   //   const url = '/title/get-details?tconst=' + movieId;
   //   return this.http.get(url);

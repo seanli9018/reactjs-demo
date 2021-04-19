@@ -9,7 +9,10 @@ import LazyImage from '../image/LazyImage'
 
 function MakeupItem(props) {
   // get props
-  const { name, image_link, brand, category, description, tag_list, product_colors } = props.makeupItem;
+  const handleClick = props.handleClick;
+  const makeupItem = props.makeupItem;
+  const { name, image_link, brand, category, description, tag_list, product_colors } = makeupItem;
+
 
   // init state
   const [display, setDisplay] = useState(false)
@@ -46,30 +49,31 @@ function MakeupItem(props) {
       })}
     </div>
 
+
   // render
   return (
     <>
       {
         !!props.makeupItem &&
-        <li className="makeup-item">
-          {/* makeup image element */}
-          <LazyImage src={image_link} alt={[fBrand,fCategory, fName]} className="makeup-image"/>
-          {/* Makeup detail info */}
-          {display && makeupDetailElement}
-          {/* Makeup bar info */}
-          <div className="makeup-info">
-            <span className="makeup-title">{fName}</span>
-            <span className="makeup-light-text makeup-type">{fBrand}</span>
-            {/* Makeup color element */}
-            {makeupColorElement}
-          </div>
-          {/* Hover cover div */}
-          <div
-            className="makeup-item-cover"
-            onMouseOver={() => setDisplay(true)}
-            onMouseOut={() => setDisplay(false)}
-          >
-          </div>
+        <li className="makeup-item" onClick={handleClick}>
+            {/* makeup image element */}
+            <LazyImage src={image_link} alt={[fBrand,fCategory, fName]} className="makeup-image"/>
+            {/* Makeup detail info */}
+            {display && makeupDetailElement}
+            {/* Makeup bar info */}
+            <div className="makeup-info">
+              <span className="makeup-title">{fName}</span>
+              <span className="makeup-light-text makeup-type">{fBrand}</span>
+              {/* Makeup color element */}
+              {makeupColorElement}
+            </div>
+            {/* Hover cover div */}
+            <div
+              className="makeup-item-cover"
+              onMouseOver={() => setDisplay(true)}
+              onMouseOut={() => setDisplay(false)}
+            >
+            </div>
         </li>
       }
     </>
@@ -78,7 +82,8 @@ function MakeupItem(props) {
 
 // specify Button component prop types
 MakeupItem.propTypes = {
-  makeupItem: PropTypes.object.isRequired
+  makeupItem: PropTypes.object.isRequired,
+  handleClick: PropTypes.func
 }
 
 MakeupItem.defaultProps = {

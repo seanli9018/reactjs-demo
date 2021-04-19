@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import {connect} from 'react-redux';
 
 // import component
-import Button from '../components/Button';
+import Button from '../components/button/Button';
 import TextInput from '../components/input/TextInput';
 
 // import custimazied hook, get language data.

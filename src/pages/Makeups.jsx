@@ -73,7 +73,7 @@ function Makeup(props) {
             <Route exact path={path} component={LipsticksList} />
             <Route path={`${path}/foundation`} component={FoundationList} />
             <Route path={`${path}/lipliner`} component={LipLinerList} />
-            <Route path={`${path}/lipsticks`} component={LipsticksList} />
+            <Route exact path={`${path}/lipsticks`} component={LipsticksList} />
             <Route path={`${path}/mascara`} component={MascaraList} />
             <Route path={`${path}/nailpolish`} component={NailPolishList} />
           </Switch>

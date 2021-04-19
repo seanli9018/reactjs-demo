@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {isAllFinished, delFinishedTasks} from "../store/actionCreators";
 
 // import component
-import Button from './Button';
+import Button from './button/Button';
 
 // import custimazied hook, get language data.
 import useLanguagePageText from '../custimizedHook/LanguageHook';

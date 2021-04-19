@@ -24,11 +24,15 @@ function LipsticksList(props) {
   // prepare func to generate list items. visibleItems are passed in by the parent component VerticalScrollVirtualList
   const renderChildren = (visibleItems) => {
     if (visibleItems) {
-      return visibleItems.map((item, index) => {
-        return <MakeupItem key={item.id} makeupItem={item} />
+      return visibleItems.map((item) => {
+        return <MakeupItem key={item.id} makeupItem={item} handleClick={()=>{routeTo(item)}}/>
       })
     }
     return null;
+  }
+  //handle item click
+  function routeTo(item) {
+    props.history.push({pathname: `/detail/makeups/${item.id}`, state: {data: item}})
   }
 
   return (
