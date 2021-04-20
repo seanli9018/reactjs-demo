@@ -25,8 +25,8 @@ function hideGlobalLoading() {
 }
 
 // the cors-anywhere is prefix is for compatibale with github pages https to send request to http api;
-// const BASE_URL = 'https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json';
-const BASE_URL = 'http://makeup-api.herokuapp.com/api/v1/products.json';
+const BASE_URL = 'https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json';
+// const BASE_URL = 'http://makeup-api.herokuapp.com/api/v1/products.json';
 
 class Http {
   constructor() {

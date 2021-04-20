@@ -17,5 +17,24 @@
   "signUpNoticeMsg": ["Successfully signed up!", "Thank you!", "Please fix the invalid input first.", "Error details can be found under the input box, starts with a \"*\""],
   "signUpSubmitBtn": "Sign Up",
   "loginLogoutMsg": ["", "Successfully logged out!"],
+  "makeupsTitle": "Makeups",
+  "makeupsSubTitle": [
+    "Data are from MakeupAPI, a free public api source. There is no backend pagination setup",
+    "Therefore, It takes a while to fetch all data at one time.",
+    "In order to enhance the performance, dynamic list items LAZY rendering is utilized.",
+    "(Only the list items within the visible screen are rendered.)"
+  ],
+  "makeupsNav": [
+    "Blush",
+    "Bronzer",
+    "Eyebrow",
+    "Eyeliner",
+    "Eyeshadow",
+    "Foundation",
+    "Lip Liner",
+    "Lipstick",
+    "Mascara",
+    "Nail Polish"
+  ],
   "appFooter": ["Email: ", "Phone: "]
 }

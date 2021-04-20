@@ -13,7 +13,6 @@ function MakeupItem(props) {
   const makeupItem = props.makeupItem;
   const { name, image_link, brand, category, description, tag_list, product_colors } = makeupItem;
 
-
   // init state
   const [display, setDisplay] = useState(false)
 

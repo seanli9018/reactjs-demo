@@ -31,5 +31,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-// export List component
+// export user center component
 export default connect(mapStateToProps, null)(UserCenter);

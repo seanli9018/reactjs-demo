@@ -35,6 +35,9 @@ function AppHeader(props) {
     React.$notice.success(logoutMsg, '', 6);
   }
 
+  // test to see if nav selected keys match
+  const makeupsReg = /\/makeups/
+  const makeupsExsit = makeupsReg.test(props.history.location.pathname);
   return (
     <>
       <Header 
@@ -42,7 +45,7 @@ function AppHeader(props) {
       >
         <Menu selectedKeys={[props.history.location.pathname]} mode="horizontal">
           {/*Route Navi*/}
-          <Menu.Item key="/makeups" icon={<HeartOutlined />}>
+          <Menu.Item key={makeupsExsit ? [props.history.location.pathname] : ""} icon={<HeartOutlined />}>
             <NavLink to="/makeups">{!!pageText.appHeader ? pageText.appHeader[4] : ""}</NavLink>
           </Menu.Item>
           <Menu.Item key="/tasks" icon={<UnorderedListOutlined />}>

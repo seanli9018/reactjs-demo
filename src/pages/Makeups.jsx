@@ -4,7 +4,10 @@ import React from 'react';
 import { Layout, Menu } from "antd";
 
 // import react router
-import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+
+// import react-redux;
+import {connect} from "react-redux";
 
 // import components
 import MakeupNav from '../components/makeup/MakeupNav';
@@ -14,22 +17,28 @@ import NailPolishList from "../components/makeup/NailPolishList";
 import MascaraList from "../components/makeup/MascaraList";
 import LipLinerList from "../components/makeup/LipLinerList";
 import FoundationList from "../components/makeup/FoundationList";
+import useLanguagePageText from "../custimizedHook/LanguageHook";
 
 
+// get content components from Layout (Antd component)
 const { Content } = Layout;
+
 
 function Makeup(props) {
   let { path, url } = useRouteMatch();
+  const { locale } = props;
+  //get lang data, passing locale to dynamically load lang data based on Redux locale state.
+  const pageText = useLanguagePageText(locale);
 
   // render
   return (
     <div>
-      <h1>Makeups</h1>
+      <h1>{pageText.makeupsTitle ? pageText.makeupsTitle : ""}</h1>
       <h5>
-        Data are from MakeupAPI, a free public api source. There is no backend pagination setup <br />
-        Therefore, It takes a while to fetch all data at one time.<br />
-        In order to enhance the performance, dynamic list items LAZY rendering is utilized.<br />
-        (Only the list items within the visible screen are rendered.)
+        {pageText.makeupsSubTitle ? pageText.makeupsSubTitle[0] : ""} <br />
+        {pageText.makeupsSubTitle ? pageText.makeupsSubTitle[1] : ""} <br />
+        {pageText.makeupsSubTitle ? pageText.makeupsSubTitle[2] : ""} <br />
+        {pageText.makeupsSubTitle ? pageText.makeupsSubTitle[3] : ""}
       </h5>
       <div className="image-grid">
         <div className="photo">
@@ -83,6 +92,12 @@ function Makeup(props) {
   )
 }
 
+// get redux state and passing it to component props
+const mapStateToProps = (state) => {
+  return {
+    locale: state.locale
+  }
+}
 
 // export List component
-export default Makeup;
+export default connect(mapStateToProps, null)(Makeup);
