@@ -11,21 +11,24 @@ import VerticalScrollVirtualList from '../utils/VerticalScrollVirtualList';
 function LipsticksList(props) {
   // init state
   const [lipsticks, setLipsticks] = useState([]);
+  const [onRequestError, setOnRequestError] = useState(false);
 
   // fetch lipsticks data, and set state
-  let authNeeded = null;
+  let authNeeded = <div>
+    <span>Sending request to a http API is not allowed from https, so we used a little work around just for demonstration. Please grant a temp access, then <strong>refresh</strong> the page. Data will be fetched.</span>
+    <iframe
+      title="Please give temp auth to request data."
+      width="100%"
+      src="https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json"
+    ></iframe>
+  </div>;
+
+  // fetch data
   useEffect(() => {
     React.$http.getLipSticks().then(res => {
       setLipsticks(res.data);
     }).catch(err => {
-      authNeeded = <div>
-        <span>Sending request to a http API is not allowed from https, so used a little work around just for demo presenting. Please grant a temp access, then <strong>refresh</strong> the page. Data will be fetch.</span>
-        <iframe
-          title="Please give temp auth to request data."
-          width="100%"
-          src="https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json"
-        ></iframe>
-      </div>
+      setOnRequestError(true);
       console.log(err)
     })
   }, [])
@@ -52,7 +55,7 @@ function LipsticksList(props) {
         function should take visibleItems as argument and loop the argument to return a item list*/}
         { renderChildren }
       </VerticalScrollVirtualList>
-      { authNeeded }
+      { onRequestError ? authNeeded : "" }
     </>
   )
 }
