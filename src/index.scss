@@ -47,6 +47,15 @@ code {
 }
 
 // common class style
+.global-loading {
+  height: 100vh;
+  div {
+    .ant-spin {
+      height: 100%;
+      max-height: 1000px;
+    }
+  }
+}
 .btn{
   border: 0 solid #ccc;
   border-radius: 3px;

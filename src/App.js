@@ -1,5 +1,5 @@
 //import react
-import React from 'react';
+import React, {useEffect} from 'react';
 
 //import react-router-dom
 import { HashRouter as Router } from "react-router-dom"
@@ -24,10 +24,22 @@ moment.locale('cn');
 
 // app file
 function App(props) {
-  const { locale } = props;
+  const { locale, loading } = props;
   console.log("Thank you for checking my code! Please contact me via email 'seanli9018@gmail.com' if you are hiring passionate web developer!!!")
 
   const antIcon = <SmileOutlined style={{ fontSize: 30 }} spin />;
+
+  // if loading is true, we prevent scrolling;
+  useEffect(() => {
+    if(loading) {
+      // handlePreventScroll();
+      document.body.style.overflowY = "hidden"
+    } else {
+      //handleRemovePreventScroll();
+      document.body.style.overflowY = "auto"
+    }
+  }, [loading])
+
   return (
     <Spin spinning={props.loading} wrapperClassName="global-loading" indicator={antIcon} tip="Working hard to get things you want!" size="large">
       {/*ConfigProvider is for antdesign UI to pass language objects globally.*/}
