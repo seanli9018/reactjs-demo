@@ -102,7 +102,7 @@ function Item(props) {
           value={!!pageText.tasksBtns?pageText.tasksBtns[2]:""}
           showBtn={showBtns}
           btnClass="delete-btn"
-          onClickFunction={() => this.handleItemDelete(item.id, item.finished)}
+          onClickFunction={() => handleItemDelete(item.id, item.finished)}
         />
       </div>
     </li>

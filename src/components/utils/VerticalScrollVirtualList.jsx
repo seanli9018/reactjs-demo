@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import PropTypes from "prop-types";
 
 // import customized hook
-import {useWindowDimensions, useEleDimensions, useScrollTop, useEleDistanceToTop} from '../../custimizedHook/elementPositions'
+import {useWindowDimensions, useElementGetBoundingClientRect, useScrollTop, useEleDistanceToTop} from '../../custimizedHook/elementPositions'
 
 function VerticalScrollVirtualList(props) {
   // get data (props.list)
@@ -24,8 +24,7 @@ function VerticalScrollVirtualList(props) {
   const listWrapperRef = useRef(null);
 
   // get list element width
-  const elementWidth = useEleDimensions(listEleRef);
-
+  const { width: elementWidth } = useElementGetBoundingClientRect(listEleRef);
   // calculate bind list element distance to page top
   const eleDistanceToTop = useEleDistanceToTop(listWrapperRef);
 

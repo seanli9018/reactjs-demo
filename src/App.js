@@ -32,10 +32,8 @@ function App(props) {
   // if loading is true, we prevent scrolling;
   useEffect(() => {
     if(loading) {
-      // handlePreventScroll();
       document.body.style.overflowY = "hidden"
     } else {
-      //handleRemovePreventScroll();
       document.body.style.overflowY = "auto"
     }
   }, [loading])

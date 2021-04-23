@@ -83,6 +83,10 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 999;
   .ant-menu {
     padding: 0;
@@ -276,7 +280,7 @@ h5 {
   padding: 30px 0;
 
   .ant-layout-sider-children {
-    margin-top: 0;
+    margin-top: -1px;
   }
   .makeup-nav-icon {
     width: 20px;
@@ -285,9 +289,25 @@ h5 {
   }
 }
 
+.makeup-broken-nav {
+  background-color: red;
+  display: inline-block;
+  width: 35px;
+  .ant-menu-item {
+    padding-left: 0 !important;
+    .makeup-top-nav-icon {
+      width: 30px;
+      height: 35px;
+      margin: 0 5px 0 0;
+    }
+  }
+
+}
+
 // makeup list item
 .makeup-list {
   .makeup-item {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

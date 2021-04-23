@@ -35,24 +35,32 @@ export function useWindowDimensions() {
 }
 
 // hook for getting element width (Will work on the element height later)
-export function useEleDimensions(element) {
-  const [ elementWidth, setElementWidth ] = useState(0);
+export function useElementGetBoundingClientRect(element, listenScroll=false) {
+  const [ elementGetBoundingClientRect, setElementGetBoundingClientRect ] = useState({});
 
   // get list element width
   useEffect(() => {
     // set state after first time mounted
-    const handleUpdateEleWidth = () => {
+    const handleUpdateEleClientRect = () => {
       if(element.current) {
-        setElementWidth(element.current.clientWidth);
+        const eleRect = element.current.getBoundingClientRect();
+        setElementGetBoundingClientRect({
+          width: eleRect.width,
+          top: eleRect.top,
+          left: eleRect.left,
+        });
       }
     }
-    window.addEventListener('resize', handleUpdateEleWidth);
-    handleUpdateEleWidth()
+    window.addEventListener('resize', handleUpdateEleClientRect);
+    handleUpdateEleClientRect();
+    if(listenScroll) {
+      window.addEventListener('scroll', handleUpdateEleClientRect);
+    }
     // on Component Will Unmount
-    return () => window.removeEventListener('resize', handleUpdateEleWidth);
+    return () => window.removeEventListener('resize', handleUpdateEleClientRect);
   }, [element.current])
 
-  return elementWidth;
+  return elementGetBoundingClientRect;
 }
 
 // hook for getting element position scroll status (scrollTop and scrolling)
