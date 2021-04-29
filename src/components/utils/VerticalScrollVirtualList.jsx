@@ -40,7 +40,7 @@ function VerticalScrollVirtualList(props) {
   const dataItemStart = startIndex <= 0 ? 0 : (startIndex * itemsPerRow); // data item start index
   const dataItemEnd = (endIndex * itemsPerRow); // data item end index
   const visibleItems = list.slice(dataItemStart, dataItemEnd); // slice all data to visible area data items based on data item start & end index
-  // console.log(startIndex)
+  // console.log(startIndex)nu
   // console.log(endIndex)
   // console.log(visibleItems)
   // prepare blank item to prevent flex display gap
