@@ -56,8 +56,8 @@ function App(props) {
 
 const mapStateToProps = (state)=>{
   return {
-    locale: state.locale,
-    loading: state.loading
+    locale: state.globalState.locale,
+    loading: state.globalState.loading
   }
 }
 

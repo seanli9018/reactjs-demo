@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
-
+import useLanguagePageText from "../../custimizedHook/LanguageHook";
 //import react-redux
 import { connect } from 'react-redux';
-import { addOneTask } from '../store/actionCreators';
-
-// import custimazied hook, get language data.
-import useLanguagePageText from '../custimizedHook/LanguageHook';
+import { addOneTask } from "../todo/store/taskActionCreators";;
 
 function TodoHeader(props) {
   const [taskInput, setTaskInput] = useState('');
@@ -60,8 +57,8 @@ function TodoHeader(props) {
 const mapStateToProps = (state /*, ownProps*/) => {
   // return newly matched store state to component props
   return {
-    tasks: state.tasks,
-    locale: state.locale
+    tasks: state.taskState.tasks,
+    locale: state.globalState.locale
   }
 }
 

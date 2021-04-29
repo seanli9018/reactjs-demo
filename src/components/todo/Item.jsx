@@ -1,16 +1,13 @@
 // React imports
 import React, { useState } from 'react';
 import PropTypes from 'prop-types'
-
+import useLanguagePageText from "../../custimizedHook/LanguageHook";
+import Button from '../button/Button';
 // react-redux imports
 import { connect } from 'react-redux';
-import {changeOneFinished, delOneTask} from "../store/actionCreators";
+import {changeOneFinished, delOneTask} from "../todo/store/taskActionCreators";;
 
 // components imports
-import Button from './button/Button';
-
-// import custimazied hook, get language data.
-import useLanguagePageText from '../custimizedHook/LanguageHook';
 
 function Item(props) {
   const [showBtns, setShowBtns] = useState(false);
@@ -116,8 +113,8 @@ Item.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks,
-    locale: state.locale
+    tasks: state.taskState.tasks,
+    locale: state.globalState.locale
   }
 }
 

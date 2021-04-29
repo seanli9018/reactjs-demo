@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // import actions to handle global loading effects
-import {openLoading, closeLoading} from "../store/actionCreators";
+import {openLoading, closeLoading} from "../store/globalActionCreators";
 
 // import store for dispatching above actions
 import store from "../store/index"

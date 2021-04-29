@@ -1,6 +1,12 @@
-import { createStore }  from 'redux';
-import reducers from './reducers'
+import { createStore, combineReducers }  from 'redux';
+import taskReducer from '../components/todo/store/taskReducers';
+import globalReducer from '../store/globalReducers';
 
-const store = createStore(reducers);
+const rootReducer = combineReducers({
+    taskState: taskReducer,
+    globalState: globalReducer
+})
+
+const store = createStore(rootReducer);
 
 export default store;

@@ -5,7 +5,7 @@ import {  Radio } from 'antd';
 
 import moment from "moment";
 import {connect} from "react-redux";
-import { changeLocale } from "../store/actionCreators";
+import { changeLocale } from "../store/globalActionCreators";
 
 
 function LangRadio(props) {
@@ -47,7 +47,7 @@ function LangRadio(props) {
 // get redux state and passing it to component props
 const mapStateToProps = (state) => {
   return {
-    locale: state.locale
+    locale: state.globalState.locale
   }
 }
 

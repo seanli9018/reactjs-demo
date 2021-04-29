@@ -1,14 +1,12 @@
 import React from 'react';
-
-// react-redux imports
-import { connect } from 'react-redux';
-import {isAllFinished, delFinishedTasks} from "../store/actionCreators";
+import useLanguagePageText from "../../custimizedHook/LanguageHook";
 
 // import component
-import Button from './button/Button';
+import Button from '../button/Button';
+// react-redux imports
+import { connect } from 'react-redux';
+import {isAllFinished, delFinishedTasks} from "../todo/store/taskActionCreators";;
 
-// import custimazied hook, get language data.
-import useLanguagePageText from '../custimizedHook/LanguageHook';
 
 function TodoFooter (props) {
   const { locale } = props;
@@ -58,8 +56,8 @@ function TodoFooter (props) {
 // get redux state and passing it to component props.
 const mapStateToProps = (state) => {
   return {
-    items: state.tasks,
-    locale: state.locale
+    items: state.taskState.tasks,
+    locale: state.globalState.locale
   }
 }
 

@@ -1,14 +1,14 @@
 import React from 'react';
 
 // Import components
-import List from '../components/List';
-import Header from '../components/TodoHeader';
-import Footer from '../components/TodoFooter';
+import List from '../components/todo/List';
+import Header from '../components/todo/TodoHeader';
+import Footer from '../components/todo/TodoFooter';
 import '../index.scss';
 
 // Import redux and react-redux
 import { connect } from 'react-redux';
-import {addAllTasks} from '../store/actionCreators';
+import {addAllTasks} from '../components/todo/store/taskActionCreators';
 
 class Todos extends React.Component {
   // Did Mount, get data

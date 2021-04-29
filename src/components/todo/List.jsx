@@ -2,11 +2,9 @@ import React from 'react';
 
 // import components
 import Item from './Item';
-
 // react-redux imports
 import { connect } from 'react-redux';
-import { moveTask } from "../store/actionCreators";
-
+import { moveTask } from "../todo/store/taskActionCreators";
 
 // List component
 function List(props) {
@@ -24,7 +22,7 @@ function List(props) {
 // get redux state and passing it to component props
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks
+    tasks: state.taskState.tasks
   }
 }
 
