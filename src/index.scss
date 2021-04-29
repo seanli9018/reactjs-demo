@@ -121,6 +121,7 @@ code {
   padding: 30px 20px 0 20px;
   box-sizing: border-box;
   min-height: calc(100vh - 65px - 80px);
+  margin-top: $headerHeight;
 }
 
 // Todo List Wrapper
