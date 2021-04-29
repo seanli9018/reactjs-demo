@@ -40,7 +40,9 @@ function VerticalScrollVirtualList(props) {
   const dataItemStart = startIndex <= 0 ? 0 : (startIndex * itemsPerRow); // data item start index
   const dataItemEnd = (endIndex * itemsPerRow); // data item end index
   const visibleItems = list.slice(dataItemStart, dataItemEnd); // slice all data to visible area data items based on data item start & end index
-
+  // console.log(startIndex)
+  // console.log(endIndex)
+  // console.log(visibleItems)
   // prepare blank item to prevent flex display gap
   let iElement = [];
   const iElementLength =  Math.floor(elementWidth / itemWidth);
@@ -69,10 +71,6 @@ function VerticalScrollVirtualList(props) {
     'padding': 0,
     'marginBottom': 0,
     'backgroundColor': 'rgba(255, 255, 255, 0)',
-    'position': 'absolute',
-    'top': 0,
-    'left': 0,
-    'right': 0,
     'transform': getTransform()
   }
 

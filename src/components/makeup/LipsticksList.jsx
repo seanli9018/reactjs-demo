@@ -26,7 +26,7 @@ function LipsticksList(props) {
   // fetch data
   useEffect(() => {
     React.$http.getLipSticks().then(res => {
-      setLipsticks(res.data);
+        setLipsticks(res.data);
     }).catch(err => {
       setOnRequestError(true);
       console.log(err)
