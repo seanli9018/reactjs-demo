@@ -170,7 +170,7 @@ function MakeupNav (props) {
 // get redux state and passing it to component props
 const mapStateToProps = (state) => {
   return {
-    locale: state.locale
+    locale: state.globalState.locale
   }
 }
 

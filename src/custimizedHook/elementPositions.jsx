@@ -75,9 +75,10 @@ export function useScrollTop() {
         scrolling: window.pageYOffset > preScrollTop
       });
     };
+    handleOnScroll();
     window.addEventListener('scroll', handleOnScroll);
 		return () => window.removeEventListener('scroll', handleOnScroll);
-  }, [scrollStatus])
+  }, [])
 
 	return scrollStatus;
 }
