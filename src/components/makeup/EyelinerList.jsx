@@ -8,9 +8,9 @@ import { HeartOutlined } from "@ant-design/icons";
 import MakeupItem from "./MakeupItem";
 import VerticalScrollVirtualList from '../utils/VerticalScrollVirtualList';
 import useFetchHook from "../../custimizedHook/useFetchHook";
-import {fetchMascara} from "./service";
+import { fetchEyeliner } from "./service";
 
-function MascaraList(props) {
+function EyelinerList(props) {
   // fetch lipsticks data, and set state
   let authNeeded = <div>
     <span>Sending request to a http API is not allowed from https, so we used a little work around just for demonstration. Please grant a temp access, then <strong>refresh</strong> the page. Data will be fetched.</span>
@@ -22,7 +22,7 @@ function MascaraList(props) {
   </div>;
 
   // fetch data
-  const { data, onError } = useFetchHook(fetchMascara);
+  const { data, onError } = useFetchHook(fetchEyeliner);
 
   // prepare func to generate list items. visibleItems are passed in by the parent component VerticalScrollVirtualList
   const renderChildren = (visibleItems) => {
@@ -40,7 +40,7 @@ function MascaraList(props) {
 
   return (
     <>
-      <h3><HeartOutlined /> Mascara </h3>
+      <h3><HeartOutlined /> Eyeliner </h3>
       <VerticalScrollVirtualList list={data} itemDimensions={{width: 206, height: 361}}>
         {/* VerticalScrollVirtualList takes a function as children.
         function should take visibleItems as argument and loop the argument to return a item list*/}
@@ -51,4 +51,4 @@ function MascaraList(props) {
   )
 }
 
-export default MascaraList;
+export default EyelinerList;

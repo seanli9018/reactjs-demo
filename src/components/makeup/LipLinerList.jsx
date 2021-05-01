@@ -1,5 +1,5 @@
 // import react
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 // import antd icon
 import { HeartOutlined } from "@ant-design/icons";
@@ -7,38 +7,46 @@ import { HeartOutlined } from "@ant-design/icons";
 // import components
 import MakeupItem from "./MakeupItem";
 import VerticalScrollVirtualList from '../utils/VerticalScrollVirtualList';
+import useFetchHook from "../../custimizedHook/useFetchHook";
+import {fetchLipLiner} from "./service";
 
 function LipLinerList(props) {
-  // init state
-  const [lipLiner, setLipLiner] = useState([]);
+  // fetch lipsticks data, and set state
+  let authNeeded = <div>
+    <span>Sending request to a http API is not allowed from https, so we used a little work around just for demonstration. Please grant a temp access, then <strong>refresh</strong> the page. Data will be fetched.</span>
+    <iframe
+      title="Please give temp auth to request data."
+      width="100%"
+      src="https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json"
+    />
+  </div>;
 
-  // fetch nail polish data, and set state
-  useEffect(() => {
-    React.$http.getLipLiner().then(res => {
-      setLipLiner(res.data);
-    }).catch(err => {
-      console.log(err)
-    })
-  }, [])
+  // fetch data
+  const { data, onError } = useFetchHook(fetchLipLiner);
 
   // prepare func to generate list items. visibleItems are passed in by the parent component VerticalScrollVirtualList
   const renderChildren = (visibleItems) => {
     if (visibleItems) {
-      return visibleItems.map(item => {
-        return <MakeupItem key={item.id} makeupItem={item} />
+      return visibleItems.map((item) => {
+        return <MakeupItem key={item.id} makeupItem={item} handleClick={()=>{routeTo(item)}}/>
       })
     }
     return null;
+  }
+  //handle item click
+  function routeTo(item) {
+    props.history.push({pathname: `/detail/makeups/${item.id}`, state: {data: item}})
   }
 
   return (
     <>
       <h3><HeartOutlined /> Lip Liner </h3>
-      <VerticalScrollVirtualList list={lipLiner} itemDimensions={{width: 206, height: 361}}>
+      <VerticalScrollVirtualList list={data} itemDimensions={{width: 206, height: 361}}>
         {/* VerticalScrollVirtualList takes a function as children.
         function should take visibleItems as argument and loop the argument to return a item list*/}
         { renderChildren }
       </VerticalScrollVirtualList>
+      { onError ? authNeeded : "" }
     </>
   )
 }

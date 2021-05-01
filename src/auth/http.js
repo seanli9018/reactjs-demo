@@ -28,70 +28,100 @@ function hideGlobalLoading() {
 const BASE_URL = 'https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json';
 // const BASE_URL = 'http://makeup-api.herokuapp.com/api/v1/products.json';
 
-class Http {
-  constructor() {
-    this.http = axios.create({
-      baseURL: BASE_URL
-    })
+const axiosIns = axios.create({
+  baseURL: BASE_URL
+})
 
-    // Add a request interceptor
-    this.http.interceptors.request.use(config => {
-      // set store.loading to true, start global page loading effects.
-      showGlobalLoading();
-      return config;
-    }, error => {
-      // Do something with request error
-      hideGlobalLoading();
-      return Promise.reject(error);
-    })
+// Add a request interceptor
+axiosIns.interceptors.request.use(config => {
+  // set store.loading to true, start global page loading effects.
+  showGlobalLoading();
+  return config;
+}, error => {
+  // Do something with request error
+  hideGlobalLoading();
+  return Promise.reject(error);
+})
 
-    // Add a response interceptor
-    this.http.interceptors.response.use(response => {
-      // Any status code that lie within the range of 2xx cause this function to trigger
-      hideGlobalLoading();
-      // Do something with response data
-      return response;
-    }, error => {
-      // Any status codes that falls outside the range of 2xx cause this function to trigger
-      hideGlobalLoading();
-      // Do something with response error
-      return Promise.reject(error);
-    })
-  }
+// Add a response interceptor
+axiosIns.interceptors.response.use(response => {
+  // Any status code that lie within the range of 2xx cause this function to trigger
+  hideGlobalLoading();
+  // Do something with response data
+  return response;
+}, error => {
+  // Any status codes that falls outside the range of 2xx cause this function to trigger
+  hideGlobalLoading();
+  // Do something with response error
+  return Promise.reject(error);
+})
 
-  getLipSticks() {
-    const url = '?product_type=lipstick';
-    return this.http.get(url);
-  }
+export default axiosIns;
 
-  getNailPolish() {
-    const url = '?product_type=nail_polish';
-    return this.http.get(url);
-  }
-
-  getMascara() {
-    const url = '?product_type=mascara';
-    return this.http.get(url);
-  }
-
-  getLipLiner() {
-    const url = '?product_type=lip_liner';
-    return this.http.get(url);
-  }
-
-  getFoundation() {
-    const url = '?product_type=foundation';
-    return this.http.get(url);
-  }
-
-  getProductDetail(id) {
-    const url = `/${id}`
-    return this.http.get(url);
-  }
+// class Http {
+//   constructor() {
+//     this.http = axios.create({
+//       baseURL: BASE_URL
+//     })
+//
+//     // Add a request interceptor
+//     this.http.interceptors.request.use(config => {
+//       // set store.loading to true, start global page loading effects.
+//       showGlobalLoading();
+//       return config;
+//     }, error => {
+//       // Do something with request error
+//       hideGlobalLoading();
+//       return Promise.reject(error);
+//     })
+//
+//     // Add a response interceptor
+//     this.http.interceptors.response.use(response => {
+//       // Any status code that lie within the range of 2xx cause this function to trigger
+//       hideGlobalLoading();
+//       // Do something with response data
+//       return response;
+//     }, error => {
+//       // Any status codes that falls outside the range of 2xx cause this function to trigger
+//       hideGlobalLoading();
+//       // Do something with response error
+//       return Promise.reject(error);
+//     })
+//   }
+//
+//   getLipSticks() {
+//     const url = '?product_type=lipstick';
+//     return axiosIns.get(url);
+//   }
+//
+//   getNailPolish() {
+//     const url = '?product_type=nail_polish';
+//     return this.http.get(url);
+//   }
+//
+//   getMascara() {
+//     const url = '?product_type=mascara';
+//     return this.http.get(url);
+//   }
+//
+//   getLipLiner() {
+//     const url = '?product_type=lip_liner';
+//     return this.http.get(url);
+//   }
+//
+//   getFoundation() {
+//     const url = '?product_type=foundation';
+//     return this.http.get(url);
+//   }
+//
+//   getProductDetail(id) {
+//     const url = `/${id}`
+//     return this.http.get(url);
+//   }
   // getMovieDetails(movieId) {
   //   const url = '/title/get-details?tconst=' + movieId;
   //   return this.http.get(url);
   // }
-}
-
-export default new Http();
+// }
+//
+// export default new Http();

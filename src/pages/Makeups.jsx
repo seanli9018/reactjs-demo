@@ -17,6 +17,11 @@ import NailPolishList from "../components/makeup/NailPolishList";
 import MascaraList from "../components/makeup/MascaraList";
 import LipLinerList from "../components/makeup/LipLinerList";
 import FoundationList from "../components/makeup/FoundationList";
+import EyeshadowList from "../components/makeup/EyeshadowList";
+import EyelinerList from "../components/makeup/EyelinerList";
+import EyebrowList from "../components/makeup/EyebrowList";
+import BronzerList from "../components/makeup/BronzerList";
+import BlushList from "../components/makeup/BlushList";
 import useLanguagePageText from "../custimizedHook/LanguageHook";
 
 
@@ -79,10 +84,15 @@ function Makeup(props) {
         <Content style={{ padding: '0 24px', minHeight: 280 }}>
           {/*Route View/output */}
           <Switch>
-            <Route exact path={path} component={LipsticksList} />
+            <Route exact path={path} component={BlushList} />
+            <Route path={`${path}/blush`} component={BlushList} />
+            <Route path={`${path}/bronzer`} component={BronzerList} />
+            <Route path={`${path}/eyebrow`} component={EyebrowList} />
+            <Route path={`${path}/eyeliner`} component={EyelinerList} />
+            <Route path={`${path}/eyeshadow`} component={EyeshadowList} />
             <Route path={`${path}/foundation`} component={FoundationList} />
             <Route path={`${path}/lipliner`} component={LipLinerList} />
-            <Route exact path={`${path}/lipsticks`} component={LipsticksList} />
+            <Route path={`${path}/lipsticks`} component={LipsticksList} />
             <Route path={`${path}/mascara`} component={MascaraList} />
             <Route path={`${path}/nailpolish`} component={NailPolishList} />
           </Switch>

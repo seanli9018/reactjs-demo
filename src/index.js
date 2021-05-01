@@ -12,12 +12,6 @@ import notice from '../src/utils/notification';
 import modal from '../src/utils/modal';
 import lang from '../src/languages/lang';
 import auth from '../src/auth/auth';
-import http from '../src/auth/http';
-
-// React.$notification = (message) => {
-//   console.log(message);
-//   notification.success({message: message});
-// }
 
 // bind notice class instance to React globally
 React.$notice = notice;
@@ -27,8 +21,6 @@ React.$modal = modal;
 React.$lang = lang;
 // bind frontend auth
 React.$auth = auth;
-// bind http.js to send xmlhttprequest to API
-React.$http = http;
 
 ReactDOM.render(
   <React.StrictMode>

@@ -37,7 +37,7 @@ function MakeupItem(props) {
       <div className="makeup-tags">
         {tagElement}
       </div>
-      <span className="makeup-length makeup-light-text">{fDescription.length>=120?fDescription.substr(0, 120) + "..." : fDescription}</span>
+      <span className="makeup-length makeup-light-text">{fDescription && (fDescription.length>=50?fDescription.substr(0, 50) + "..." : fDescription)}</span>
     </div>
 
   //prepare makeup color circles element

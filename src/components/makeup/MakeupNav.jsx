@@ -18,7 +18,7 @@ import {connect} from "react-redux";
 const { Sider } = Layout;
 
 function MakeupNav (props) {
-  let { path, url } = useRouteMatch();
+  let { url } = useRouteMatch();
   // on window <= md 768px, set onSideBreak to true
   const [onSideBreak, setOnSideBreak] = useState(false);
 
@@ -38,7 +38,7 @@ function MakeupNav (props) {
     defaultOpenKeys={['sub1']}
     style={{ height: '100%' }}
   >
-    <Menu.Item key={`${url}/blush`}>
+    <Menu.Item key={props.history.location.pathname === url ? url : `${url}/blush`}>
       <NavLink to={`${url}/blush`}>
         <LazyImage
           src="http://makeup-api.herokuapp.com/assets/blush-ff7992c3d7690d18a9b0224177cfbdedbc036497cf87c393ec01c6a2ef070258.svg"
@@ -108,7 +108,7 @@ function MakeupNav (props) {
         {pageText.makeupsNav ? pageText.makeupsNav[6] : ""}
       </NavLink>
     </Menu.Item>
-    <Menu.Item key={props.history.location.pathname === url ? url : `${url}/lipsticks`}>
+    <Menu.Item key={`${url}/lipsticks`}>
       <NavLink to={`${url}/lipsticks`}>
         <LazyImage
           src="http://makeup-api.herokuapp.com/assets/lipstick-4531b48ee71839393857e24c8cbc4dede1f99d2284ef82a6eb0a2a4d03540a14.svg"

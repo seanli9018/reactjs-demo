@@ -1,5 +1,5 @@
 // import react
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 // import antd icon
 import { HeartOutlined } from "@ant-design/icons";
@@ -7,11 +7,12 @@ import { HeartOutlined } from "@ant-design/icons";
 // import components
 import MakeupItem from "./MakeupItem";
 import VerticalScrollVirtualList from '../utils/VerticalScrollVirtualList';
+import useFetchHook from "../../custimizedHook/useFetchHook";
+
+import { fetchLipStickList } from './service'
+
 
 function LipsticksList(props) {
-  // init state
-  const [lipsticks, setLipsticks] = useState([]);
-  const [onRequestError, setOnRequestError] = useState(false);
 
   // fetch lipsticks data, and set state
   let authNeeded = <div>
@@ -20,18 +21,11 @@ function LipsticksList(props) {
       title="Please give temp auth to request data."
       width="100%"
       src="https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json"
-    ></iframe>
+    />
   </div>;
 
   // fetch data
-  useEffect(() => {
-    React.$http.getLipSticks().then(res => {
-        setLipsticks(res.data);
-    }).catch(err => {
-      setOnRequestError(true);
-      console.log(err)
-    })
-  }, [])
+  const { data, onError } = useFetchHook(fetchLipStickList);
 
   // prepare func to generate list items. visibleItems are passed in by the parent component VerticalScrollVirtualList
   const renderChildren = (visibleItems) => {
@@ -50,12 +44,12 @@ function LipsticksList(props) {
   return (
     <>
       <h3><HeartOutlined /> Lipsticks </h3>
-      <VerticalScrollVirtualList list={lipsticks} itemDimensions={{width: 206, height: 361}}>
+      <VerticalScrollVirtualList list={data} itemDimensions={{width: 206, height: 361}}>
         {/* VerticalScrollVirtualList takes a function as children.
         function should take visibleItems as argument and loop the argument to return a item list*/}
         { renderChildren }
       </VerticalScrollVirtualList>
-      { onRequestError ? authNeeded : "" }
+      { onError ? authNeeded : "" }
     </>
   )
 }
