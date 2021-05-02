@@ -43,6 +43,9 @@ function VerticalScrollVirtualList(props) {
   // console.log(startIndex)nu
   // console.log(endIndex)
   // console.log(visibleItems)
+  //console.log(scrollTop)
+  //console.log(eleDistanceToTop)
+  //console.log(startOffset)
   // prepare blank item to prevent flex display gap
   let iElement = [];
   const iElementLength =  Math.floor(elementWidth / itemWidth);

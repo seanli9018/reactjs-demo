@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 // hook for obtaining hook's previous state
 export function usePrevious(value) {
@@ -83,21 +83,25 @@ export function useScrollTop() {
 	return scrollStatus;
 }
 
-// hook for getting element top to body top distance after first time mounted
-// (not the distance to parent element, no dependencies, which means will not update after component updated)
+// hook for getting element top to body top
 export function useEleDistanceToTop (element) {
   const [distanceToTop, setDistanceToTop] = useState(0);
 
+  const handleUpdateEleDistanceToTop = useCallback(() => {
+    let eleDistanceToTop = element.current ? (window.pageYOffset + element.current.getBoundingClientRect().top) : 0;
+    setDistanceToTop(eleDistanceToTop);
+  }, [window.pageYOffset, element.current]);
+
   useEffect(() => {
-    const handleUpdateEleDistanceToTop = () => {
-      let eleDistanceToTop = element.current ? (window.pageYOffset + element.current.getBoundingClientRect().top) : 0;
-      setDistanceToTop(eleDistanceToTop);
-    }
     handleUpdateEleDistanceToTop();
     window.addEventListener('resize', handleUpdateEleDistanceToTop);
+    window.addEventListener('scroll', handleUpdateEleDistanceToTop);
     // on Component Will Unmount
-    return () => window.removeEventListener('resize', handleUpdateEleDistanceToTop);
-  }, []);
+    return () => {
+      window.removeEventListener('resize', handleUpdateEleDistanceToTop)
+      window.removeEventListener('scroll', handleUpdateEleDistanceToTop)
+    };
+  }, [handleUpdateEleDistanceToTop]);
 
   return distanceToTop;
 }
