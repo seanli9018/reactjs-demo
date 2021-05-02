@@ -87,10 +87,10 @@ export function useScrollTop() {
 export function useEleDistanceToTop (element) {
   const [distanceToTop, setDistanceToTop] = useState(0);
 
-  const handleUpdateEleDistanceToTop = useCallback(() => {
+  const handleUpdateEleDistanceToTop = () => {
     let eleDistanceToTop = element.current ? (window.pageYOffset + element.current.getBoundingClientRect().top) : 0;
     setDistanceToTop(eleDistanceToTop);
-  }, [window.pageYOffset, element.current]);
+  }
 
   useEffect(() => {
     handleUpdateEleDistanceToTop();
@@ -101,7 +101,7 @@ export function useEleDistanceToTop (element) {
       window.removeEventListener('resize', handleUpdateEleDistanceToTop)
       window.removeEventListener('scroll', handleUpdateEleDistanceToTop)
     };
-  }, [handleUpdateEleDistanceToTop]);
+  }, []);
 
   return distanceToTop;
 }

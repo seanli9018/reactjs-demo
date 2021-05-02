@@ -13,7 +13,7 @@ export default function useFetchHook(apiCallback) {
       setOnError(true);
       console.log(err)
     }
-  }, [apiCallback, setData])
+  }, [apiCallback, setData, setOnError])
 
   useEffect(() => {
     fetchTask();
