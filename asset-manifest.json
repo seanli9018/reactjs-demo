@@ -2,28 +2,28 @@
   "files": {
     "static/js/0.49af9ba5.chunk.js": "/reactjs-demo/static/js/0.49af9ba5.chunk.js",
     "static/js/0.49af9ba5.chunk.js.map": "/reactjs-demo/static/js/0.49af9ba5.chunk.js.map",
-    "main.css": "/reactjs-demo/static/css/main.8891e2fe.chunk.css",
-    "main.js": "/reactjs-demo/static/js/main.6e4512aa.chunk.js",
-    "main.js.map": "/reactjs-demo/static/js/main.6e4512aa.chunk.js.map",
+    "main.css": "/reactjs-demo/static/css/main.47cfbd0d.chunk.css",
+    "main.js": "/reactjs-demo/static/js/main.09c6d03f.chunk.js",
+    "main.js.map": "/reactjs-demo/static/js/main.09c6d03f.chunk.js.map",
     "runtime-main.js": "/reactjs-demo/static/js/runtime-main.c3f4fd0a.js",
     "runtime-main.js.map": "/reactjs-demo/static/js/runtime-main.c3f4fd0a.js.map",
     "static/css/3.53aeb601.chunk.css": "/reactjs-demo/static/css/3.53aeb601.chunk.css",
-    "static/js/3.d872f17d.chunk.js": "/reactjs-demo/static/js/3.d872f17d.chunk.js",
-    "static/js/3.d872f17d.chunk.js.map": "/reactjs-demo/static/js/3.d872f17d.chunk.js.map",
+    "static/js/3.90f717ca.chunk.js": "/reactjs-demo/static/js/3.90f717ca.chunk.js",
+    "static/js/3.90f717ca.chunk.js.map": "/reactjs-demo/static/js/3.90f717ca.chunk.js.map",
     "static/js/4.501a93ba.chunk.js": "/reactjs-demo/static/js/4.501a93ba.chunk.js",
     "static/js/4.501a93ba.chunk.js.map": "/reactjs-demo/static/js/4.501a93ba.chunk.js.map",
     "static/js/5.bcaf341c.chunk.js": "/reactjs-demo/static/js/5.bcaf341c.chunk.js",
     "static/js/5.bcaf341c.chunk.js.map": "/reactjs-demo/static/js/5.bcaf341c.chunk.js.map",
     "index.html": "/reactjs-demo/index.html",
     "static/css/3.53aeb601.chunk.css.map": "/reactjs-demo/static/css/3.53aeb601.chunk.css.map",
-    "static/css/main.8891e2fe.chunk.css.map": "/reactjs-demo/static/css/main.8891e2fe.chunk.css.map",
-    "static/js/3.d872f17d.chunk.js.LICENSE.txt": "/reactjs-demo/static/js/3.d872f17d.chunk.js.LICENSE.txt"
+    "static/css/main.47cfbd0d.chunk.css.map": "/reactjs-demo/static/css/main.47cfbd0d.chunk.css.map",
+    "static/js/3.90f717ca.chunk.js.LICENSE.txt": "/reactjs-demo/static/js/3.90f717ca.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c3f4fd0a.js",
     "static/css/3.53aeb601.chunk.css",
-    "static/js/3.d872f17d.chunk.js",
-    "static/css/main.8891e2fe.chunk.css",
-    "static/js/main.6e4512aa.chunk.js"
+    "static/js/3.90f717ca.chunk.js",
+    "static/css/main.47cfbd0d.chunk.css",
+    "static/js/main.09c6d03f.chunk.js"
   ]
 }
