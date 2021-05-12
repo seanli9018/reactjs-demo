@@ -313,52 +313,61 @@ h5 {
     flex-direction: column;
     justify-content: flex-start;
     width: 206px;
-    height: 361px;
-    position: relative;
-    .makeup-item-cover {
-      background-color: rgba(76, 175, 80, 0);
-      height: 100%;
-      width: 206px;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .makeup-image {
-      width: 206px;
-      height: 294px;
-      overflow: hidden;
-    }
-    .makeup-details {
-      width: 206px;
-      height: 165px;
-      background-color: #000000;
-      position: absolute;
-      top: 127px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 6px;
-      box-sizing: border-box;
-      @include border-top-shadow-dark;
-      .makeup-title {
-        font-weight: bold;
-        color: #fff;
+    height: 390px;
+    overflow: hidden;
+    cursor: pointer;
+    .makeup-image-wrapper {
+      position: relative;
+      max-height: 297px;
+      flex-grow: 0;
+      .makeup-image {
+        width: 100%;
+        overflow: hidden;
       }
-      .makeup-tags {
+      .makeup-details {
+        width: 206px;
+        max-height: 165px;
+        background-color: #000000;
+        position: absolute;
+        bottom: -250px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-start;
-        flex-wrap: wrap;
-        .makeup-tag {
-          @include tag-light;
+        padding: 6px;
+        box-sizing: border-box;
+        @include border-top-shadow-dark;
+        .makeup-title {
+          font-weight: bold;
+          color: #fff;
+        }
+        .makeup-tags {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          .makeup-tag {
+            @include tag-light;
+          }
         }
       }
     }
+    
+    &:hover .makeup-image-wrapper {
+      .makeup-details{
+        transform: translateY(-250px);
+        transition: 0.8s;
+      }
+    }
+    
     .makeup-info {
+      position: relative;
+      overflow: hidden;
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       padding: 6px;
+      background-color: #fff;
       .makeup-title {
         font-weight: bold;
       }

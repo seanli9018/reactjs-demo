@@ -41,7 +41,7 @@ function FoundationList(props) {
   return (
     <>
       <h3><HeartOutlined /> Foundation </h3>
-      <VerticalScrollVirtualList list={data} itemDimensions={{width: 206, height: 361}}>
+      <VerticalScrollVirtualList list={data} itemDimensions={{width: 206, height: 390}}>
         {/* VerticalScrollVirtualList takes a function as children.
         function should take visibleItems as argument and loop the argument to return a item list*/}
         { renderChildren }

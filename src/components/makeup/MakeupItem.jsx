@@ -13,9 +13,6 @@ function MakeupItem(props) {
   const makeupItem = props.makeupItem;
   const { name, image_link, brand, category, description, tag_list, product_colors } = makeupItem;
 
-  // init state
-  const [display, setDisplay] = useState(false)
-
   //prepare data string using capString filter
   let strArr = [name, brand, category, description];
   const [fName, fBrand, fCategory, fDescription] = capString(strArr);
@@ -55,24 +52,19 @@ function MakeupItem(props) {
       {
         !!props.makeupItem &&
         <li className="makeup-item" onClick={handleClick}>
+          <div className="makeup-image-wrapper">
             {/* makeup image element */}
             <LazyImage src={image_link} alt={[fBrand,fCategory, fName]} className="makeup-image"/>
             {/* Makeup detail info */}
-            {display && makeupDetailElement}
-            {/* Makeup bar info */}
-            <div className="makeup-info">
-              <span className="makeup-title">{fName}</span>
-              <span className="makeup-light-text makeup-type">{fBrand}</span>
-              {/* Makeup color element */}
-              {makeupColorElement}
-            </div>
-            {/* Hover cover div */}
-            <div
-              className="makeup-item-cover"
-              onMouseOver={() => setDisplay(true)}
-              onMouseOut={() => setDisplay(false)}
-            >
-            </div>
+            {makeupDetailElement}
+          </div>
+          {/* Makeup bar info */}
+          <div className="makeup-info">
+            <span className="makeup-title">{fName}</span>
+            <span className="makeup-light-text makeup-type">{fBrand}</span>
+            {/* Makeup color element */}
+            {makeupColorElement}
+          </div>
         </li>
       }
     </>
